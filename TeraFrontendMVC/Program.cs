@@ -16,6 +16,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+// Configure the app to listen on port 80
+app.Urls.Add("http://*:80"); // Asegúrate de que la aplicación escuche en el puerto 80
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
