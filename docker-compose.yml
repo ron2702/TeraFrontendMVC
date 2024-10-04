@@ -8,8 +8,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     networks:
-      - frontend_network  # Red interna para comunicación, si es necesaria
+      - shared_network
 
 networks:
-  frontend_network:
+  shared_network:
     driver: bridge
