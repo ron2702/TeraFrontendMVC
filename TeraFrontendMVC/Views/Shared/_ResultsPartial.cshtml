@@ -1,0 +1,52 @@
+﻿@model ResultsResponseViewModel
+
+<!-- Tabla de resultados -->
+<h3>Resultados</h3>
+<table id="resultadosTable">
+    <tr>
+        <th>Centro</th>
+        <th>Mesa</th>
+        <th>EG</th>
+        <th>NM</th>
+        <th>LM</th>
+        <th>JABE</th>
+        <th>JOBR</th>
+        <th>AE</th>
+        <th>CF</th>
+        <th>DC</th>
+        <th>EM</th>
+        <th>BERA</th>
+    </tr>
+    @foreach (var resultado in Model.Resultados)
+    {
+        <tr>
+            <td>@resultado.Centro</td>
+            <td>@resultado.Mesa</td>
+            <td>@resultado.EG</td>
+            <td>@resultado.NM</td>
+            <td>@resultado.LM</td>
+            <td>@resultado.JABE</td>
+            <td>@resultado.JOBR</td>
+            <td>@resultado.AE</td>
+            <td>@resultado.CF</td>
+            <td>@resultado.DC</td>
+            <td>@resultado.EM</td>
+            <td>@resultado.BERA</td>
+        </tr>
+    }
+</table>
+
+<!-- Votos Totales -->
+<h3>Votos Totales</h3>
+<div id="votosTotales">
+    <p>EG Total: @Model.SumaVotos.TotalEG</p>
+    <p>NM Total: @Model.SumaVotos.TotalNM</p>
+    <p>LM Total: @Model.SumaVotos.TotalLM</p>
+    <p>JABE Total: @Model.SumaVotos.TotalJABE</p>
+    <p>JOBR Total: @Model.SumaVotos.TotalJOBR</p>
+    <p>AE Total: @Model.SumaVotos.TotalAE</p>
+    <p>CF Total: @Model.SumaVotos.TotalCF</p>
+    <p>DC Total: @Model.SumaVotos.TotalDC</p>
+    <p>EM Total: @Model.SumaVotos.TotalEM</p>
+    <p>BERA Total: @Model.SumaVotos.TotalBERA</p>
+</div>

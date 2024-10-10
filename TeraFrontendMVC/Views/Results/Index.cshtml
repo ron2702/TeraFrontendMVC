@@ -1,7 +1,28 @@
 ﻿@model SelectsViewModel
 
-<!-- Aquí incluimos el Partial View de los Selects -->
 @Html.Partial("_SelectsPartial", Model)
 
 <button id="btnBuscar">Buscar</button>
 
+<div id="resultadosParciales">
+    <!-- Aquí se cargará la vista parcial con los resultados -->
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    document.getElementById("btnBuscar").addEventListener("click", function () {
+        var codEdo = document.getElementById("selectEstado").value;
+        var codMun = document.getElementById("selectMunicipio").value;
+        var codPar = document.getElementById("selectParroquia").value;
+
+        // Llamar al controlador del frontend que hará la búsqueda
+        fetch(`/Results/Buscar?codEdo=${codEdo}&codMun=${codMun}&codPar=${codPar}`)
+            .then(response => response.text()) // Cambiado a 'text()' para manejar HTML
+            .then(data => {
+                console.log(data);
+                document.getElementById("resultadosParciales").innerHTML = data;
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+</script>

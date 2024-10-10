@@ -3,6 +3,7 @@
 <h3>Seleccione Estado, Municipio y Parroquia</h3>
 
 <!-- Select para Estados -->
+<label>Estado</label>
 <select id="selectEstado">
     <option value="">Seleccione un estado</option>
     @foreach (var estado in Model.States)
@@ -12,6 +13,7 @@
 </select>
 
 <!-- Select para Municipios -->
+<label>Municipio</label>
 <select id="selectMunicipio">
     <option value="">Seleccione un municipio</option>
     @foreach (var municipio in Model.Municipalities)
@@ -21,6 +23,7 @@
 </select>
 
 <!-- Select para Parroquias -->
+<label>Parroquia</label>
 <select id="selectParroquia">
     <option value="">Seleccione una parroquia</option>
     @foreach (var parroquia in Model.Parishes)

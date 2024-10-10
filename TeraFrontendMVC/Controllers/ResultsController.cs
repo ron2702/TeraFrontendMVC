@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Text.Json;
 using TeraFrontendMVC.Models;
 
@@ -35,68 +36,50 @@ namespace TeraFrontendMVC.Controllers
             return View(model);
         }
 
-        // GET: Results/Create
-        public ActionResult Create()
+        [HttpGet]
+        public async Task<IActionResult> Buscar(int? codEdo, int? codMun, int? codPar)
         {
-            return View();
-        }
 
-        // POST: Results/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
             try
             {
-                return RedirectToAction(nameof(Index));
+                string url = $"http://web/api/Resultados/resultados?codEdo={codEdo}&codMun={codMun}&codPar={codPar}";
+
+                using (HttpClient client = new HttpClient())
+                {
+                    var response = await client.GetAsync(url);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var jsonData = await response.Content.ReadAsStringAsync();
+
+                        // Deserializar la respuesta JSON en el modelo ResultadosResponse
+                        var resultadosResponse = JsonConvert.DeserializeObject<ResultsResponseViewModel>(jsonData);
+
+                        if (resultadosResponse != null)
+                        {
+                            // Devolver todo el objeto ResultadosResponse
+                            return PartialView("_ResultsPartial", resultadosResponse);
+                        }
+                        else
+                        {
+                            _logger.LogError("La respuesta JSON es nula o no tiene el formato esperado.");
+                            return PartialView("_ResultsPartial", new ResultsResponseViewModel());
+                        }
+                    }
+                    else
+                    {
+                        _logger.LogError("Error al buscar los resultados: " + response.StatusCode);
+                        return PartialView("_ResultsPartial", new ResultsResponseViewModel());
+                    }
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                _logger.LogError(ex, "Excepción al buscar los resultados.");
+                return PartialView("_ResultsPartial", new ResultsResponseViewModel());
             }
         }
 
-        // GET: Results/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Results/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Results/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Results/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         private async Task<List<StateViewModel>> GetStates(int? codEdo)
         {
@@ -118,7 +101,7 @@ namespace TeraFrontendMVC.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync();
-                    states = JsonSerializer.Deserialize<List<StateViewModel>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    states = System.Text.Json.JsonSerializer.Deserialize<List<StateViewModel>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                 }
                 else
                 {
@@ -158,7 +141,7 @@ namespace TeraFrontendMVC.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync();
-                    municipality = JsonSerializer.Deserialize<List<MunicipalityViewModel>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    municipality = System.Text.Json.JsonSerializer.Deserialize<List<MunicipalityViewModel>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                 }
                 else
                 {
@@ -197,7 +180,7 @@ namespace TeraFrontendMVC.Controllers
                 if (response.IsSuccessStatusCode)
                 {
                     var json = await response.Content.ReadAsStringAsync();
-                    parish = JsonSerializer.Deserialize<List<ParishViewModel>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    parish = System.Text.Json.JsonSerializer.Deserialize<List<ParishViewModel>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                 }
                 else
                 {
