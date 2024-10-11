@@ -1,0 +1,33 @@
+﻿
+#TitleContainer p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+#selectContainer {
+    display: flex;
+    margin: 20px 0;
+}
+
+#selectContainer label {
+    margin-right: 10px;
+}
+
+#btnBuscar {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#btnBuscar:hover {
+    background-color: #45a049;
+}

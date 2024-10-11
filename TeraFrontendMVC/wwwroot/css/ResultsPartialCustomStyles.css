@@ -1,0 +1,47 @@
+﻿/* Estilo para la tabla de resultados */
+
+#TitleContainer p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+#resultadosTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#resultadosTable th, #resultadosTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#resultadosTable th {
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+#resultadosTable tr:hover {
+    background-color: #f5f5f5;
+}
+
+#votosTotalesTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#votosTotalesTable th, #votosTotalesTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+#votosTotalesTable th {
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+#votosTotalesTable tr:hover {
+    background-color: #f5f5f5;
+}

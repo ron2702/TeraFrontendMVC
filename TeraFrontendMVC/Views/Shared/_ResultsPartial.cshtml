@@ -1,7 +1,9 @@
 ﻿@model ResultsResponseViewModel
 
 <!-- Tabla de resultados -->
-<h3>Resultados</h3>
+<div id="TitleContainer">
+    <p>Resultados:</p>
+</div>
 <table id="resultadosTable">
     <tr>
         <th>Centro</th>
@@ -37,16 +39,33 @@
 </table>
 
 <!-- Votos Totales -->
-<h3>Votos Totales</h3>
-<div id="votosTotales">
-    <p>EG Total: @Model.SumaVotos.TotalEG</p>
-    <p>NM Total: @Model.SumaVotos.TotalNM</p>
-    <p>LM Total: @Model.SumaVotos.TotalLM</p>
-    <p>JABE Total: @Model.SumaVotos.TotalJABE</p>
-    <p>JOBR Total: @Model.SumaVotos.TotalJOBR</p>
-    <p>AE Total: @Model.SumaVotos.TotalAE</p>
-    <p>CF Total: @Model.SumaVotos.TotalCF</p>
-    <p>DC Total: @Model.SumaVotos.TotalDC</p>
-    <p>EM Total: @Model.SumaVotos.TotalEM</p>
-    <p>BERA Total: @Model.SumaVotos.TotalBERA</p>
+<div id="TitleContainer">
+    <p>Votos Totales:</p>
 </div>
+
+<table id="votosTotalesTable">
+    <tr>
+        <th>EG Total</th>
+        <th>NM Total</th>
+        <th>LM Total</th>
+        <th>JABE Total</th>
+        <th>JOBR Total</th>
+        <th>AE Total</th>
+        <th>CF Total</th>
+        <th>DC Total</th>
+        <th>EM Total</th>
+        <th>BERA Total</th>
+    </tr>
+    <tr>
+        <td>@Model.SumaVotos.TotalEG</td>
+        <td>@Model.SumaVotos.TotalNM</td>
+        <td>@Model.SumaVotos.TotalLM</td>
+        <td>@Model.SumaVotos.TotalJABE</td>
+        <td>@Model.SumaVotos.TotalJOBR</td>
+        <td>@Model.SumaVotos.TotalAE</td>
+        <td>@Model.SumaVotos.TotalCF</td>
+        <td>@Model.SumaVotos.TotalDC</td>
+        <td>@Model.SumaVotos.TotalEM</td>
+        <td>@Model.SumaVotos.TotalBERA</td>
+    </tr>
+</table>

@@ -1,33 +1,43 @@
 ﻿@model SelectsViewModel
 
-<h3>Seleccione Estado, Municipio y Parroquia</h3>
+<div id="TitleContainer">
+    <p>Seleccione Estado, Municipio y Parroquia:</p>
+</div>
 
 <!-- Select para Estados -->
-<label>Estado</label>
-<select id="selectEstado">
-    <option value="">Seleccione un estado</option>
-    @foreach (var estado in Model.States)
-    {
-        <option value="@estado.CodEdo">@estado.Nombre</option>
-    }
-</select>
+<div id="selectContainer">
+    <label>Estado:</label>
+    <select id="selectEstado">
+        <option value="">Seleccione un estado</option>
+        @foreach (var estado in Model.States)
+        {
+            <option value="@estado.CodEdo">@estado.Nombre</option>
+        }
+    </select>
+</div>
 
 <!-- Select para Municipios -->
-<label>Municipio</label>
-<select id="selectMunicipio">
-    <option value="">Seleccione un municipio</option>
-    @foreach (var municipio in Model.Municipalities)
-    {
-        <option value="@municipio.CodMun">@municipio.Nombre</option>
-    }
-</select>
+<div id="selectContainer">
+    <label>Municipio:</label>
+    <select id="selectMunicipio">
+        <option value="">Seleccione un municipio</option>
+        @foreach (var municipio in Model.Municipalities)
+        {
+            <option value="@municipio.CodMun">@municipio.Nombre</option>
+        }
+    </select>
+</div>
 
 <!-- Select para Parroquias -->
-<label>Parroquia</label>
-<select id="selectParroquia">
-    <option value="">Seleccione una parroquia</option>
-    @foreach (var parroquia in Model.Parishes)
-    {
-        <option value="@parroquia.CodPar">@parroquia.Nombre</option>
-    }
-</select>
+<div id="selectContainer">
+    <label>Parroquia:</label>
+    <select id="selectParroquia">
+        <option value="">Seleccione una parroquia</option>
+        @foreach (var parroquia in Model.Parishes)
+        {
+            <option value="@parroquia.CodPar">@parroquia.Nombre</option>
+        }
+    </select>
+</div>
+
+
