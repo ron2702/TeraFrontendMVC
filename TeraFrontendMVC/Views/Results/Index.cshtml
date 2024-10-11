@@ -14,7 +14,7 @@
         var codMun = document.getElementById("selectMunicipio").value;
         var codPar = document.getElementById("selectParroquia").value;
 
-        // Llamar al controlador del frontend que hará la búsqueda
+        // Llama al controlador
         fetch(`/Results/Buscar?codEdo=${codEdo}&codMun=${codMun}&codPar=${codPar}`)
             .then(response => response.text()) // Cambiado a 'text()' para manejar HTML
             .then(data => {

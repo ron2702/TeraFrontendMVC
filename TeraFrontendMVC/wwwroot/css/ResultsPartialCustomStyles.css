@@ -18,8 +18,9 @@
 }
 
 #resultadosTable th {
-    background-color: #f2f2f2;
+    background-color: #4CAF50;
     text-align: center;
+    color: white;
 }
 
 #resultadosTable tr:hover {
@@ -38,8 +39,9 @@
 }
 
 #votosTotalesTable th {
-    background-color: #f2f2f2;
+    background-color: #4CAF50;
     text-align: center;
+    color: white;
 }
 
 #votosTotalesTable tr:hover {
