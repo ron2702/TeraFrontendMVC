@@ -7,15 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\js\search.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\css\ResultsPartialCustomStyles.css" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\js\search.js" />
   </ItemGroup>
 
   <ItemGroup>
