@@ -4,68 +4,78 @@
 <div id="TitleContainer">
     <p>Resultados:</p>
 </div>
-<table id="resultadosTable">
-    <tr>
-        <th>Centro</th>
-        <th>Mesa</th>
-        <th>EG</th>
-        <th>NM</th>
-        <th>LM</th>
-        <th>JABE</th>
-        <th>JOBR</th>
-        <th>AE</th>
-        <th>CF</th>
-        <th>DC</th>
-        <th>EM</th>
-        <th>BERA</th>
-    </tr>
-    @foreach (var resultado in Model.Resultados)
-    {
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+else
+{
+    <table id="resultadosTable">
         <tr>
-            <td>@resultado.Centro</td>
-            <td>@resultado.Mesa</td>
-            <td>@resultado.EG</td>
-            <td>@resultado.NM</td>
-            <td>@resultado.LM</td>
-            <td>@resultado.JABE</td>
-            <td>@resultado.JOBR</td>
-            <td>@resultado.AE</td>
-            <td>@resultado.CF</td>
-            <td>@resultado.DC</td>
-            <td>@resultado.EM</td>
-            <td>@resultado.BERA</td>
+            <th>Centro</th>
+            <th>Mesa</th>
+            <th>EG</th>
+            <th>NM</th>
+            <th>LM</th>
+            <th>JABE</th>
+            <th>JOBR</th>
+            <th>AE</th>
+            <th>CF</th>
+            <th>DC</th>
+            <th>EM</th>
+            <th>BERA</th>
         </tr>
-    }
-</table>
+        @foreach (var resultado in Model.Resultados)
+        {
+            <tr>
+                <td>@resultado.Centro</td>
+                <td>@resultado.Mesa</td>
+                <td>@resultado.EG</td>
+                <td>@resultado.NM</td>
+                <td>@resultado.LM</td>
+                <td>@resultado.JABE</td>
+                <td>@resultado.JOBR</td>
+                <td>@resultado.AE</td>
+                <td>@resultado.CF</td>
+                <td>@resultado.DC</td>
+                <td>@resultado.EM</td>
+                <td>@resultado.BERA</td>
+            </tr>
+        }
+    </table>
 
-<!-- Votos Totales -->
-<div id="TitleContainer">
-    <p>Votos Totales:</p>
-</div>
+    <!-- Votos Totales -->
+    <div id="TitleContainer">
+        <p>Votos Totales:</p>
+    </div>
 
-<table id="votosTotalesTable">
-    <tr>
-        <th>EG Total</th>
-        <th>NM Total</th>
-        <th>LM Total</th>
-        <th>JABE Total</th>
-        <th>JOBR Total</th>
-        <th>AE Total</th>
-        <th>CF Total</th>
-        <th>DC Total</th>
-        <th>EM Total</th>
-        <th>BERA Total</th>
-    </tr>
-    <tr>
-        <td>@Model.SumaVotos.TotalEG</td>
-        <td>@Model.SumaVotos.TotalNM</td>
-        <td>@Model.SumaVotos.TotalLM</td>
-        <td>@Model.SumaVotos.TotalJABE</td>
-        <td>@Model.SumaVotos.TotalJOBR</td>
-        <td>@Model.SumaVotos.TotalAE</td>
-        <td>@Model.SumaVotos.TotalCF</td>
-        <td>@Model.SumaVotos.TotalDC</td>
-        <td>@Model.SumaVotos.TotalEM</td>
-        <td>@Model.SumaVotos.TotalBERA</td>
-    </tr>
-</table>
+    <table id="votosTotalesTable">
+        <tr>
+            <th>EG Total</th>
+            <th>NM Total</th>
+            <th>LM Total</th>
+            <th>JABE Total</th>
+            <th>JOBR Total</th>
+            <th>AE Total</th>
+            <th>CF Total</th>
+            <th>DC Total</th>
+            <th>EM Total</th>
+            <th>BERA Total</th>
+        </tr>
+        <tr>
+            <td>@Model.SumaVotos.TotalEG</td>
+            <td>@Model.SumaVotos.TotalNM</td>
+            <td>@Model.SumaVotos.TotalLM</td>
+            <td>@Model.SumaVotos.TotalJABE</td>
+            <td>@Model.SumaVotos.TotalJOBR</td>
+            <td>@Model.SumaVotos.TotalAE</td>
+            <td>@Model.SumaVotos.TotalCF</td>
+            <td>@Model.SumaVotos.TotalDC</td>
+            <td>@Model.SumaVotos.TotalEM</td>
+            <td>@Model.SumaVotos.TotalBERA</td>
+        </tr>
+    </table>
+
+}

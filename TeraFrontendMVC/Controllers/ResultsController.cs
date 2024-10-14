@@ -63,20 +63,23 @@ namespace TeraFrontendMVC.Controllers
                         else
                         {
                             _logger.LogError("La respuesta JSON es nula o no tiene el formato esperado.");
-                            return PartialView("_ResultsPartial", new ResultsResponseViewModel());
+                            ViewBag.ErrorMessage = "Ocurrió un error al obtener los resultados. Por favor, verifica tu selección e intenta nuevamente.";
+                            return PartialView("_ResultsPartial");
                         }
                     }
                     else
                     {
                         _logger.LogError("Error al buscar los resultados: " + response.StatusCode);
-                        return PartialView("_ResultsPartial", new ResultsResponseViewModel());
+                        ViewBag.ErrorMessage = "Ocurrió un error al obtener los resultados. Por favor, verifica tu selección e intenta nuevamente.";
+                        return PartialView("_ResultsPartial");
                     }
                 }
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Excepción al buscar los resultados.");
-                return PartialView("_ResultsPartial", new ResultsResponseViewModel());
+                ViewBag.ErrorMessage = "Ocurrió un error al obtener los resultados. Por favor, verifica tu selección e intenta nuevamente.";
+                return PartialView("_ResultsPartial");
             }
         }
 
