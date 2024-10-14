@@ -42,7 +42,8 @@ namespace TeraFrontendMVC.Controllers
 
             try
             {
-                string url = $"http://web/api/Resultados/resultados?codEdo={codEdo}&codMun={codMun}&codPar={codPar}";
+                int pageSize = 15;
+                string url = $"http://web/api/Resultados/resultados?codEdo={codEdo}&codMun={codMun}&codPar={codPar}&pageSize={pageSize}";
 
                 using (HttpClient client = new HttpClient())
                 {
