@@ -6,19 +6,20 @@
 }
 
 #selectContainer {
-    display: flex;
-    margin: 20px 0;
+    display: inline-flex;
+    margin: 10px 5px;
 }
 
 #selectContainer label {
     margin-right: 10px;
+    font-weight: bold;
 }
 
 #btnBuscar {
     background-color: #4CAF50;
     border: none;
     color: white;
-    padding: 10px 20px;
+    padding: 5px 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;

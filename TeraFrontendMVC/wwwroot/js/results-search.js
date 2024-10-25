@@ -1,65 +1,87 @@
 ﻿function resultsSearch() {
-    document.getElementById("btnBuscar").addEventListener("click", function () {
-        var codEdo = document.getElementById("selectEstado").value;
-        var codMun = document.getElementById("selectMunicipio").value;
-        var codPar = document.getElementById("selectParroquia").value;
+    const codEdo = document.getElementById("selectEstado")?.value || null;
+    const codMun = document.getElementById("selectMunicipio")?.value || null;
+    const codPar = document.getElementById("selectParroquia")?.value || null;
+    const pageSize = document.getElementById("rowsSelect")?.value || 5;
 
-        // Llama al controlador
-        fetch(`/Results/Buscar?codEdo=${codEdo}&codMun=${codMun}&codPar=${codPar}`)
-            .then(response => response.text()) // Cambiado a 'text()' para manejar HTML
-            .then(data => {
-                document.getElementById("resultadosParciales").innerHTML = data;
-            })
-            .catch(error => console.error('Error:', error));
+    // Llama al controlador con pageSize actualizado
+    fetch(`/Results/Buscar?codEdo=${codEdo}&codMun=${codMun}&codPar=${codPar}&pageSize=${pageSize}`)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("resultadosParciales").innerHTML = data;
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Evento en el botón buscar
+    const btnBuscar = document.getElementById("btnBuscar");
+    if (btnBuscar) {
+        btnBuscar.addEventListener("click", function () {
+            resultsSearch(); // Llama a resultsSearch con los valores actuales
+        });
+    }
+
+    // Evento en dropdown para actualizar pageSize y refrescar resultados automáticamente
+    const rowsSelect = document.getElementById("rowsSelect");
+    if (rowsSelect) {
+        rowsSelect.addEventListener("change", function () {
+            resultsSearch(); // Llama a resultsSearch cuando cambia el dropdown de filas
+        });
+    }
+});
+
+// Verificación en cada `addEventListener`
+const selectEstado = document.getElementById("selectEstado");
+if (selectEstado) {
+    selectEstado.addEventListener("change", function () {
+        const estadoCodigo = this.value;
+        const selectMunicipio = document.getElementById("selectMunicipio");
+        const selectParroquia = document.getElementById("selectParroquia");
+
+        if (estadoCodigo) {
+            fetch(`/Results/GetMunicipios?codEdo=${estadoCodigo}`)
+                .then(response => response.json())
+                .then(data => {
+                    selectMunicipio.innerHTML = '<option value="">Seleccione un municipio</option>';
+                    data.forEach(municipio => {
+                        selectMunicipio.innerHTML += `<option value="${municipio.codMun}">${municipio.nombre}</option>`;
+                    });
+                    selectMunicipio.disabled = false;
+
+                    selectParroquia.innerHTML = '<option value="">Seleccione una parroquia</option>';
+                    selectParroquia.disabled = true;
+                })
+                .catch(error => console.error('Error:', error));
+        } else {
+            selectMunicipio.innerHTML = '<option value="">Seleccione un municipio</option>';
+            selectMunicipio.disabled = true;
+            selectParroquia.innerHTML = '<option value="">Seleccione una parroquia</option>';
+            selectParroquia.disabled = true;
+        }
     });
 }
 
-document.getElementById('selectEstado').addEventListener('change', function () {
-    const estadoCodigo = this.value;
-    const selectMunicipio = document.getElementById("selectMunicipio");
-    const selectParroquia = document.getElementById("selectParroquia");
+const selectMunicipio = document.getElementById("selectMunicipio");
+if (selectMunicipio) {
+    selectMunicipio.addEventListener("change", function () {
+        const munCodigo = this.value;
+        const selectParroquia = document.getElementById("selectParroquia");
 
-    if (estadoCodigo) {
-        fetch(`/Results/GetMunicipios?codEdo=${estadoCodigo}`)
-            .then(response => response.json())
-            .then(data => {
-                selectMunicipio.innerHTML = '<option value="">Seleccione un municipio</option>';
-                data.forEach(municipio => {
-                    selectMunicipio.innerHTML += `<option value="${municipio.codMun}">${municipio.nombre}</option>`;
-                });
-                selectMunicipio.disabled = false;
-
-                selectParroquia.innerHTML = '<option value="">Seleccione una parroquia</option>';
-                selectParroquia.disabled = true;
-            })
-            .catch(error => console.error('Error:', error));
-    } else {
-        // Vaciar y deshabilitar los dropdowns si no se selecciona un estado
-        selectMunicipio.innerHTML = '<option value="">Seleccione un municipio</option>';
-        selectMunicipio.disabled = true;
-        selectParroquia.innerHTML = '<option value="">Seleccione una parroquia</option>';
-        selectParroquia.disabled = true;
-    }
-});
-
-document.getElementById('selectMunicipio').addEventListener('change', function () {
-    const munCodigo = this.value;
-    const selectParroquia = document.getElementById("selectParroquia");
-
-    if (munCodigo) {
-        fetch(`/Results/GetParroquias?codMun=${munCodigo}`)
-            .then(response => response.json())
-            .then(data => {
-                selectParroquia.innerHTML = '<option value="">Seleccione una parroquia</option>';
-                data.forEach(parroquia => {
-                    selectParroquia.innerHTML += `<option value="${parroquia.codPar}">${parroquia.nombre}</option>`;
-                });
-                selectParroquia.disabled = false;
-            })
-            .catch(error => console.error('Error:', error));
-    } else {
-        // Vaciar y deshabilitar el dropdown de parroquias si no se selecciona un municipio
-        selectParroquia.innerHTML = '<option value="">Seleccione una parroquia</option>';
-        selectParroquia.disabled = true;
-    }
-});
+        if (munCodigo) {
+            fetch(`/Results/GetParroquias?codMun=${munCodigo}`)
+                .then(response => response.json())
+                .then(data => {
+                    selectParroquia.innerHTML = '<option value="">Seleccione una parroquia</option>';
+                    data.forEach(parroquia => {
+                        selectParroquia.innerHTML += `<option value="${parroquia.codPar}">${parroquia.nombre}</option>`;
+                    });
+                    selectParroquia.disabled = false;
+                })
+                .catch(error => console.error('Error:', error));
+        } else {
+            selectParroquia.innerHTML = '<option value="">Seleccione una parroquia</option>';
+            selectParroquia.disabled = true;
+        }
+    });
+}

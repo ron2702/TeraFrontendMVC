@@ -4,11 +4,30 @@
 
 <button id="btnBuscar">Buscar</button>
 
-<div id="resultadosParciales">
+<div>
+    <label for="rowsSelect">Mostrar filas:</label>
+    <select id="rowsSelect">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+    </select>
 </div>
+
+<div id="resultadosParciales"></div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="~/js/results-search.js"></script>
 <script>
-    resultsSearch();
+    document.addEventListener("DOMContentLoaded", function () {
+        resultsSearch(); // Llama a resultsSearch una vez que el DOM está completamente cargado
+
+        const rowsSelect = document.getElementById("rowsSelect");
+        if (rowsSelect) {
+            rowsSelect.addEventListener("change", function () {
+                console.log('Aqui'); // Esto debería imprimirse cuando cambias el dropdown
+                resultsSearch(); // Llama a resultsSearch cuando cambia el dropdown de filas
+            });
+        }
+    });
 </script>
