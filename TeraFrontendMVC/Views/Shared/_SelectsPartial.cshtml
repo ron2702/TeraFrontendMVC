@@ -21,10 +21,6 @@
     <label>Municipio:</label>
     <select id="selectMunicipio">
         <option value="">Seleccione un municipio</option>
-        @foreach (var municipio in Model.Municipalities)
-        {
-            <option value="@municipio.CodMun">@municipio.Nombre</option>
-        }
     </select>
 </div>
 
@@ -33,10 +29,6 @@
     <label>Parroquia:</label>
     <select id="selectParroquia">
         <option value="">Seleccione una parroquia</option>
-        @foreach (var parroquia in Model.Parishes)
-        {
-            <option value="@parroquia.CodPar">@parroquia.Nombre</option>
-        }
     </select>
 </div>
 

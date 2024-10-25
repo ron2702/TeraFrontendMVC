@@ -21,9 +21,9 @@ namespace TeraFrontendMVC.Controllers
         public async Task<IActionResult> Index()
         {
             // Obtener los estados, municipios y parroquias reutilizando los métodos privados
-            var states = await GetStates(null); // null significa que no hay codEdo para filtrar
-            var municipalities = await GetMunicipality(null, null); // No hay codMun ni codEdo
-            var parishes = await GetParish(null); // No hay codPar
+            var states = await GetStates(null);
+            var municipalities = new List<MunicipalityViewModel>();
+            var parishes = new List<ParishViewModel>();
 
             // Crear un modelo para pasar a la vista
             var model = new SelectsViewModel
@@ -82,6 +82,21 @@ namespace TeraFrontendMVC.Controllers
                 return PartialView("_ResultsPartial");
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetMunicipios(int codEdo)
+        {
+            var municipios = await GetMunicipality(null, codEdo); // Obtener municipios filtrados por estado
+            return Json(municipios);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetParroquias(int codMun)
+        {
+            var parroquias = await GetParish(codMun, null); // Obtener parroquias filtradas por municipio
+            return Json(parroquias);
+        }
+
 
 
         private async Task<List<StateViewModel>> GetStates(int? codEdo)
@@ -159,7 +174,7 @@ namespace TeraFrontendMVC.Controllers
             return municipality;
         }
 
-        private async Task<List<ParishViewModel>> GetParish(int? codPar)
+        private async Task<List<ParishViewModel>> GetParish(int? codMun, int? codPar)
         {
 
             List<ParishViewModel> parish = new List<ParishViewModel>();
@@ -168,11 +183,14 @@ namespace TeraFrontendMVC.Controllers
             {
                 // Crear la query string condicionalmente según los parámetros
                 var queryString = $"http://web/api/Region/parroquias?";
+                if (codMun.HasValue)
+                {
+                    queryString += $"codMun={codMun.Value}";
+                }
                 if (codPar.HasValue)
                 {
                     Console.WriteLine("Entre al if");
                     queryString += $"codPar={codPar.Value}";
-                    Console.WriteLine(queryString);
                 }
 
                 // Eliminar el último '&' sobrante o '?'
