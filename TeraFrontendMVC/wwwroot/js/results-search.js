@@ -1,11 +1,12 @@
-﻿function resultsSearch() {
+﻿let currentPage = '1';
+function resultsSearch() {
     const codEdo = document.getElementById("selectEstado")?.value || null;
     const munId = document.getElementById("selectMunicipio")?.value || null;
     const codPar = document.getElementById("selectParroquia")?.value || null;
     const pageSize = document.getElementById("rowsSelect")?.value || 5;
 
     // Llama al controlador con pageSize actualizado
-    fetch(`/Results/Buscar?codEdo=${codEdo}&munId=${munId}&codPar=${codPar}&pageSize=${pageSize}`)
+    fetch(`/Results/Buscar?codEdo=${codEdo}&munId=${munId}&codPar=${codPar}&pageSize=${pageSize}&pageNumber=${currentPage}`)
         .then(response => response.text())
         .then(data => {
             document.getElementById("resultadosParciales").innerHTML = data;
@@ -18,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnBuscar = document.getElementById("btnBuscar");
     if (btnBuscar) {
         btnBuscar.addEventListener("click", function () {
+            currentPage = '1'
             resultsSearch(); // Llama a resultsSearch con los valores actuales
         });
     }
@@ -30,6 +32,15 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+function changePage(direction) {
+    if (direction === 'next') {
+        currentPage++;
+    } else if (direction === 'prev' && currentPage > 1) {
+        currentPage--;
+    }
+    resultsSearch();
+}
 
 // Verificación en cada `addEventListener`
 const selectEstado = document.getElementById("selectEstado");

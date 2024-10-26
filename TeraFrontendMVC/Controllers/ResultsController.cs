@@ -37,12 +37,12 @@ namespace TeraFrontendMVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Buscar(int? codEdo, int? munId, int? codPar, int? pageSize)
+        public async Task<IActionResult> Buscar(int? codEdo, int? munId, int? codPar, int? pageSize, int? pageNumber)
         {
 
             try
             {
-                string url = $"http://web/api/Resultados/resultados?codEdo={codEdo}&munId={munId}&codPar={codPar}&pageSize={pageSize}";
+                string url = $"http://web/api/Resultados/resultados?codEdo={codEdo}&munId={munId}&codPar={codPar}&pageSize={pageSize}&pageNumber={pageNumber}";
 
                 using (HttpClient client = new HttpClient())
                 {
@@ -57,7 +57,7 @@ namespace TeraFrontendMVC.Controllers
 
                         if (resultadosResponse != null)
                         {
-                            // Devolver todo el objeto ResultadosResponse
+                            resultadosResponse.PageNumber = pageNumber?.ToString() ?? "1";
                             return PartialView("_ResultsPartial", resultadosResponse);
                         }
                         else

@@ -42,10 +42,15 @@ else
             </tr>
         }
     </table>
+    <div class="pagination">
+        <button onclick="changePage('prev')">&lt;</button>
+        <span>Página @Model.PageNumber</span>
+        <button onclick="changePage('next')">&gt;</button>
+    </div>
 
     <!-- Votos Totales -->
     <div id="TitleContainer">
-        <p>Votos Totales:</p>
+        <p>Votos Totales por Candidato:</p>
     </div>
 
     <table id="votosTotalesTable">
