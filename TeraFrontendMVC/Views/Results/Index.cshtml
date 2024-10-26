@@ -21,13 +21,5 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         resultsSearch(); // Llama a resultsSearch una vez que el DOM está completamente cargado
-
-        const rowsSelect = document.getElementById("rowsSelect");
-        if (rowsSelect) {
-            rowsSelect.addEventListener("change", function () {
-                console.log('Aqui'); // Esto debería imprimirse cuando cambias el dropdown
-                resultsSearch(); // Llama a resultsSearch cuando cambia el dropdown de filas
-            });
-        }
     });
 </script>

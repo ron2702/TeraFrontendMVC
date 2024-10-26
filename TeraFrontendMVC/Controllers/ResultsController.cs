@@ -37,12 +37,12 @@ namespace TeraFrontendMVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Buscar(int? codEdo, int? codMun, int? codPar, int? pageSize)
+        public async Task<IActionResult> Buscar(int? codEdo, int? munId, int? codPar, int? pageSize)
         {
 
             try
             {
-                string url = $"http://web/api/Resultados/resultados?codEdo={codEdo}&codMun={codMun}&codPar={codPar}&pageSize={pageSize}";
+                string url = $"http://web/api/Resultados/resultados?codEdo={codEdo}&munId={munId}&codPar={codPar}&pageSize={pageSize}";
 
                 using (HttpClient client = new HttpClient())
                 {

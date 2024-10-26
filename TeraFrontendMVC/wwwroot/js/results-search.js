@@ -1,11 +1,11 @@
 ﻿function resultsSearch() {
     const codEdo = document.getElementById("selectEstado")?.value || null;
-    const codMun = document.getElementById("selectMunicipio")?.value || null;
+    const munId = document.getElementById("selectMunicipio")?.value || null;
     const codPar = document.getElementById("selectParroquia")?.value || null;
     const pageSize = document.getElementById("rowsSelect")?.value || 5;
 
     // Llama al controlador con pageSize actualizado
-    fetch(`/Results/Buscar?codEdo=${codEdo}&codMun=${codMun}&codPar=${codPar}&pageSize=${pageSize}`)
+    fetch(`/Results/Buscar?codEdo=${codEdo}&munId=${munId}&codPar=${codPar}&pageSize=${pageSize}`)
         .then(response => response.text())
         .then(data => {
             document.getElementById("resultadosParciales").innerHTML = data;
@@ -45,7 +45,7 @@ if (selectEstado) {
                 .then(data => {
                     selectMunicipio.innerHTML = '<option value="">Seleccione un municipio</option>';
                     data.forEach(municipio => {
-                        selectMunicipio.innerHTML += `<option value="${municipio.codMun}">${municipio.nombre}</option>`;
+                        selectMunicipio.innerHTML += `<option value="${municipio.id}">${municipio.nombre}</option>`;
                     });
                     selectMunicipio.disabled = false;
 
