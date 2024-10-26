@@ -6,6 +6,32 @@
     margin: 20px 0;
 }
 
+#resultadosTableContainer {
+    max-height: 275px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+}
+
+    /* Estilo del scrollbar para el contenedor de la tabla */
+    #resultadosTableContainer::-webkit-scrollbar {
+        width: 8px; 
+    }
+
+    #resultadosTableContainer::-webkit-scrollbar-thumb {
+        background-color: #4CAF50;
+        border-radius: 5px;
+    }
+
+    #resultadosTableContainer::-webkit-scrollbar-thumb:hover {
+        background-color: #45a049;
+    }
+
+    #resultadosTableContainer::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 5px;
+    }
+
 #resultadosTable {
     width: 100%;
     border-collapse: collapse;
@@ -49,7 +75,7 @@
 }
 
 #rows-amount {
-    margin: 25px 0 10px 0;
+    margin: 10px 0 10px 0;
 }
 
 #rows-amount label {

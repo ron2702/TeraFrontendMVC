@@ -9,39 +9,41 @@
 }
 else
 {
-    <table id="resultadosTable">
-        <tr>
-            <th>Centro</th>
-            <th>Mesa</th>
-            <th>EG</th>
-            <th>NM</th>
-            <th>LM</th>
-            <th>JABE</th>
-            <th>JOBR</th>
-            <th>AE</th>
-            <th>CF</th>
-            <th>DC</th>
-            <th>EM</th>
-            <th>BERA</th>
-        </tr>
-        @foreach (var resultado in Model.Resultados)
-        {
+    <div id="resultadosTableContainer">
+        <table id="resultadosTable">
             <tr>
-                <td>@resultado.Centro</td>
-                <td>@resultado.Mesa</td>
-                <td>@resultado.EG</td>
-                <td>@resultado.NM</td>
-                <td>@resultado.LM</td>
-                <td>@resultado.JABE</td>
-                <td>@resultado.JOBR</td>
-                <td>@resultado.AE</td>
-                <td>@resultado.CF</td>
-                <td>@resultado.DC</td>
-                <td>@resultado.EM</td>
-                <td>@resultado.BERA</td>
+                <th>Centro</th>
+                <th>Mesa</th>
+                <th>EG</th>
+                <th>NM</th>
+                <th>LM</th>
+                <th>JABE</th>
+                <th>JOBR</th>
+                <th>AE</th>
+                <th>CF</th>
+                <th>DC</th>
+                <th>EM</th>
+                <th>BERA</th>
             </tr>
-        }
-    </table>
+            @foreach (var resultado in Model.Resultados)
+            {
+                <tr>
+                    <td>@resultado.Centro</td>
+                    <td>@resultado.Mesa</td>
+                    <td>@resultado.EG</td>
+                    <td>@resultado.NM</td>
+                    <td>@resultado.LM</td>
+                    <td>@resultado.JABE</td>
+                    <td>@resultado.JOBR</td>
+                    <td>@resultado.AE</td>
+                    <td>@resultado.CF</td>
+                    <td>@resultado.DC</td>
+                    <td>@resultado.EM</td>
+                    <td>@resultado.BERA</td>
+                </tr>
+            }
+        </table>
+    </div>
     <div class="pagination">
         <button onclick="changePage('prev')">&lt;</button>
         <span>Página @Model.PageNumber</span>
