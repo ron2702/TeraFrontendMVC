@@ -25,24 +25,31 @@ else
                 <th>EM</th>
                 <th>BERA</th>
             </tr>
-            @foreach (var resultado in Model.Resultados)
+            @if (@Model.Amount > 0)
             {
-                <tr>
-                    <td>@resultado.Centro</td>
-                    <td>@resultado.Mesa</td>
-                    <td>@resultado.EG.ToString("N0")</td>
-                    <td>@resultado.NM.ToString("N0")</td>
-                    <td>@resultado.LM.ToString("N0")</td>
-                    <td>@resultado.JABE.ToString("N0")</td>
-                    <td>@resultado.JOBR.ToString("N0")</td>
-                    <td>@resultado.AE.ToString("N0")</td>
-                    <td>@resultado.CF.ToString("N0")</td>
-                    <td>@resultado.DC.ToString("N0")</td>
-                    <td>@resultado.EM.ToString("N0")</td>
-                    <td>@resultado.BERA.ToString("N0")</td>
-                </tr>
+                @foreach (var resultado in Model.Resultados)
+                {
+                    <tr>
+                        <td>@resultado.Centro</td>
+                        <td>@resultado.Mesa</td>
+                        <td>@resultado.EG.ToString("N0")</td>
+                        <td>@resultado.NM.ToString("N0")</td>
+                        <td>@resultado.LM.ToString("N0")</td>
+                        <td>@resultado.JABE.ToString("N0")</td>
+                        <td>@resultado.JOBR.ToString("N0")</td>
+                        <td>@resultado.AE.ToString("N0")</td>
+                        <td>@resultado.CF.ToString("N0")</td>
+                        <td>@resultado.DC.ToString("N0")</td>
+                        <td>@resultado.EM.ToString("N0")</td>
+                        <td>@resultado.BERA.ToString("N0")</td>
+                    </tr>
+                }
             }
         </table>
+        @if (@Model.Amount == 0)
+        {
+            <p>No hay resultados para mostrar.</p>
+        }
     </div>
     <div class="pagination">
         @if (int.Parse(Model.PageNumber) > 1)
