@@ -56,7 +56,8 @@ if (selectEstado) {
                 .then(data => {
                     selectMunicipio.innerHTML = '<option value="">Seleccione un municipio</option>';
                     data.forEach(municipio => {
-                        selectMunicipio.innerHTML += `<option value="${municipio.id}">${municipio.nombre}</option>`;
+                        const cleanedName = cleanName(municipio.nombre); // Llamar a la función de limpieza
+                        selectMunicipio.innerHTML += `<option value="${municipio.id}">${cleanedName}</option>`;
                     });
                     selectMunicipio.disabled = false;
 
@@ -85,7 +86,8 @@ if (selectMunicipio) {
                 .then(data => {
                     selectParroquia.innerHTML = '<option value="">Seleccione una parroquia</option>';
                     data.forEach(parroquia => {
-                        selectParroquia.innerHTML += `<option value="${parroquia.codPar}">${parroquia.nombre}</option>`;
+                        const cleanedName = cleanName(parroquia.nombre);
+                        selectParroquia.innerHTML += `<option value="${parroquia.codPar}">${cleanedName}</option>`;
                     });
                     selectParroquia.disabled = false;
                 })
@@ -95,4 +97,8 @@ if (selectMunicipio) {
             selectParroquia.disabled = true;
         }
     });
+}
+
+function cleanName(name) {
+    return name.replace(/[\uFFFD]/g, 'Ñ');
 }
