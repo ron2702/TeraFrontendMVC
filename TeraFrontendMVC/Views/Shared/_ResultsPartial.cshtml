@@ -30,24 +30,30 @@ else
                 <tr>
                     <td>@resultado.Centro</td>
                     <td>@resultado.Mesa</td>
-                    <td>@resultado.EG</td>
-                    <td>@resultado.NM</td>
-                    <td>@resultado.LM</td>
-                    <td>@resultado.JABE</td>
-                    <td>@resultado.JOBR</td>
-                    <td>@resultado.AE</td>
-                    <td>@resultado.CF</td>
-                    <td>@resultado.DC</td>
-                    <td>@resultado.EM</td>
-                    <td>@resultado.BERA</td>
+                    <td>@resultado.EG.ToString("N0")</td>
+                    <td>@resultado.NM.ToString("N0")</td>
+                    <td>@resultado.LM.ToString("N0")</td>
+                    <td>@resultado.JABE.ToString("N0")</td>
+                    <td>@resultado.JOBR.ToString("N0")</td>
+                    <td>@resultado.AE.ToString("N0")</td>
+                    <td>@resultado.CF.ToString("N0")</td>
+                    <td>@resultado.DC.ToString("N0")</td>
+                    <td>@resultado.EM.ToString("N0")</td>
+                    <td>@resultado.BERA.ToString("N0")</td>
                 </tr>
             }
         </table>
     </div>
     <div class="pagination">
-        <button onclick="changePage('prev')">&lt;</button>
+        @if (int.Parse(Model.PageNumber) > 1)
+        {
+            <button onclick="changePage('prev')">&lt;</button>
+        }
         <span>Página @Model.PageNumber</span>
-        <button onclick="changePage('next')">&gt;</button>
+        @if (@Model.Amount > 0)
+        {
+            <button onclick="changePage('next')">&gt;</button>
+        }
     </div>
 
     <!-- Votos Totales -->
@@ -69,16 +75,16 @@ else
             <th>BERA Total</th>
         </tr>
         <tr>
-            <td>@Model.SumaVotos.TotalEG</td>
-            <td>@Model.SumaVotos.TotalNM</td>
-            <td>@Model.SumaVotos.TotalLM</td>
-            <td>@Model.SumaVotos.TotalJABE</td>
-            <td>@Model.SumaVotos.TotalJOBR</td>
-            <td>@Model.SumaVotos.TotalAE</td>
-            <td>@Model.SumaVotos.TotalCF</td>
-            <td>@Model.SumaVotos.TotalDC</td>
-            <td>@Model.SumaVotos.TotalEM</td>
-            <td>@Model.SumaVotos.TotalBERA</td>
+            <td>@Model.SumaVotos.TotalEG.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalNM.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalLM.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalJABE.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalJOBR.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalAE.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalCF.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalDC.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalEM.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalBERA.ToString("N0")</td>
         </tr>
     </table>
 
