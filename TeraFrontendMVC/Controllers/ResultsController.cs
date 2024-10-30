@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Globalization;
 using System.Text.Json;
 using TeraFrontendMVC.Models;
 
@@ -120,6 +121,9 @@ namespace TeraFrontendMVC.Controllers
                 {
                     var json = await response.Content.ReadAsStringAsync();
                     states = System.Text.Json.JsonSerializer.Deserialize<List<StateViewModel>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                    // Aplicar el formato al nombre de cada estado
+                    states.ForEach(state => state.Nombre = FormatName(state.Nombre));
                 }
                 else
                 {
@@ -160,6 +164,8 @@ namespace TeraFrontendMVC.Controllers
                 {
                     var json = await response.Content.ReadAsStringAsync();
                     municipality = System.Text.Json.JsonSerializer.Deserialize<List<MunicipalityViewModel>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                    municipality.ForEach(mun => mun.Nombre = FormatName(mun.Nombre));
                 }
                 else
                 {
@@ -202,6 +208,8 @@ namespace TeraFrontendMVC.Controllers
                 {
                     var json = await response.Content.ReadAsStringAsync();
                     parish = System.Text.Json.JsonSerializer.Deserialize<List<ParishViewModel>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+                    parish.ForEach(par => par.Nombre = FormatName(par.Nombre));
                 }
                 else
                 {
@@ -214,6 +222,13 @@ namespace TeraFrontendMVC.Controllers
             }
 
             return parish;
+        }
+
+        private string FormatName(string name)
+        {
+            string sanitizedInput = name.Replace("\uFFFD", "ñ");
+            sanitizedInput = sanitizedInput.ToLower();
+            return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(sanitizedInput);
         }
     }
 }

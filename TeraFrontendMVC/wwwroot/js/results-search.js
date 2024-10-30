@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const rowsSelect = document.getElementById("rowsSelect");
     if (rowsSelect) {
         rowsSelect.addEventListener("change", function () {
+            currentPage = '1';
             resultsSearch(); // Llama a resultsSearch cuando cambia el dropdown de filas
         });
     }
@@ -56,8 +57,7 @@ if (selectEstado) {
                 .then(data => {
                     selectMunicipio.innerHTML = '<option value="">Seleccione un municipio</option>';
                     data.forEach(municipio => {
-                        const cleanedName = cleanName(municipio.nombre); // Llamar a la función de limpieza
-                        selectMunicipio.innerHTML += `<option value="${municipio.id}">${cleanedName}</option>`;
+                        selectMunicipio.innerHTML += `<option value="${municipio.id}">${municipio.nombre}</option>`;
                     });
                     selectMunicipio.disabled = false;
 
@@ -86,8 +86,7 @@ if (selectMunicipio) {
                 .then(data => {
                     selectParroquia.innerHTML = '<option value="">Seleccione una parroquia</option>';
                     data.forEach(parroquia => {
-                        const cleanedName = cleanName(parroquia.nombre);
-                        selectParroquia.innerHTML += `<option value="${parroquia.codPar}">${cleanedName}</option>`;
+                        selectParroquia.innerHTML += `<option value="${parroquia.codPar}">${parroquia.nombre}</option>`;
                     });
                     selectParroquia.disabled = false;
                 })
@@ -97,8 +96,4 @@ if (selectMunicipio) {
             selectParroquia.disabled = true;
         }
     });
-}
-
-function cleanName(name) {
-    return name.replace(/[\uFFFD]/g, 'Ñ');
 }
