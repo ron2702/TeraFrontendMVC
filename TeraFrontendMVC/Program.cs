@@ -29,7 +29,7 @@ app.UseAuthorization();
 app.Urls.Add("http://*:80"); // Asegúrate de que la aplicación escuche en el puerto 80
 
 app.MapControllerRoute(
-    name: "Results",
-    pattern: "{controller=Results}/{action=Index}/{id?}");
+    name: "Home",
+    pattern: "{controller=Home}/{action=Index}");
 
 app.Run();

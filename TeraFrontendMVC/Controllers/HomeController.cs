@@ -1,21 +1,46 @@
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System;
 using System.Diagnostics;
+using System.Drawing.Printing;
+using System.Net.Http;
 using TeraFrontendMVC.Models;
 
 namespace TeraFrontendMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly HttpClient _httpClient;
+        private readonly ILogger<Users> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(HttpClient httpClient, ILogger<Users> logger)
         {
+            _httpClient = httpClient;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            string url = $"http://web/api/Resultados/resultados";
+            using (HttpClient client = new HttpClient())
+            {
+                var response = await client.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonData = await response.Content.ReadAsStringAsync();
+
+                    // Deserializar la respuesta JSON en el modelo ResultadosResponse
+                    var resultadosResponse = JsonConvert.DeserializeObject<ResultsResponseViewModel>(jsonData);
+
+                    if (resultadosResponse != null)
+                    {
+                        return View(resultadosResponse);
+                    }
+                }
+            }
+
+                return View();
         }
 
         public IActionResult Privacy()

@@ -1,5 +1,20 @@
-﻿/* Estilo para la tabla de resultados */
+﻿/*Estilos para el home*/
+.view-results-link {
+    margin: 20px 0;
+    font-weight: bold;
+}
 
+.total-votes {
+    margin: 20px 0;
+}
+
+    .total-votes p {
+        font-size: 24px;
+        color: #4CAF50;
+        font-weight: 700;
+    }
+
+    /* Estilo para la tabla de resultados */
 #TitleContainer p {
     font-size: 24px;
     font-weight: bold;

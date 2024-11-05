@@ -1,8 +1,47 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Elecciones 2024";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1>@ViewData["Title"]</h1>
+    <p>Aqui visualizarás los resultados de las elecciones presidenciales que ocurrieron en Venezuela el 28 de Julio del 2024.</p>
+    <div class="view-results-link text-center">
+        <a href="/Results">Ver Resultados Detallados</a>
+    </div>
+</div>
+
+<div class="results-summary text-center">
+
+    <div class="total-votes">
+        <h1>Total Nacional</h1>
+        <p>@($"{Model.SumaVotos.TotalVotosValidos:N0} votos")</p>
+    </div>
+
+    <table id="votosTotalesTable">
+        <tr>
+            <th>Edmundo Gonzalez</th>
+            <th>Nicolas Maduro</th>
+            <th>Luis Martinez</th>
+            <th>Javier Bertucci</th>
+            <th>Jose Brito</th>
+            <th>Antonio Ecarri</th>
+            <th>Claudio Fermin</th>
+            <th>Daniel Ceballos</th>
+            <th>Enrique Marquez</th>
+            <th>Benjamin Rausseo</th>
+        </tr>
+        <tr>
+            <td>@Model.SumaVotos.TotalEG.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalNM.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalLM.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalJABE.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalJOBR.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalAE.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalCF.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalDC.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalEM.ToString("N0")</td>
+            <td>@Model.SumaVotos.TotalBERA.ToString("N0")</td>
+        </tr>
+    </table>
+
 </div>

@@ -2,6 +2,7 @@
 {
     public class TotalVotesViewModel
     {
+        public int TotalVotosValidos { get; set; }
         public int TotalVotosNulos { get; set; }
         public int TotalEG { get; set; }
         public int TotalNM { get; set; }
