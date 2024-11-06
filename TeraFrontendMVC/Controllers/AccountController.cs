@@ -27,32 +27,45 @@ namespace TeraFrontendMVC.Controllers
             return View(model); // Si hay errores, vuelve a mostrar el formulario
         }
 
+        // GET: Account/Register
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        // POST: Account/Register
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Register(IFormCollection collection)
+        public IActionResult Register(Register model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                // Lógica de autenticación aquí
+                return RedirectToAction("Index", "Home"); // Redirige a la página principal si es exitoso
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(model); // Si hay errores, vuelve a mostrar el formulario
+        }
+
+        // GET: Account/Register
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangePassword(IFormCollection collection)
+        public IActionResult ChangePassword(ChangePassword model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                // Lógica de autenticación aquí
+                return RedirectToAction("Index", "Home"); // Redirige a la página principal si es exitoso
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(model); // Si hay errores, vuelve a mostrar el formulario
         }
     }
 }

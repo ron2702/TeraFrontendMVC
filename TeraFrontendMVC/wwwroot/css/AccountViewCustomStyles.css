@@ -11,12 +11,17 @@
 
 #loginForm {
     width: 100%;
+    height: 100%;
     /*max-width: 400px;*/
     padding: 2rem;
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
+}
+
+.login-title, .register-title, .change-pwd-title {
+    color: #45a049;
 }
 
 /* Input Styles */
@@ -118,6 +123,21 @@ label {
     }
 }
 
+/* Register, Change Password*/
+#registerForm, #changePwdForm {
+    width: 100%;
+    height: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.register-container, .change-password-container {
+    justify-items: center;
+}
 
 /* Error Messages */
 .validation-summary-errors {

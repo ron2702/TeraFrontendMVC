@@ -1,0 +1,31 @@
+﻿@model TeraFrontendMVC.Models.Account.Register
+
+<div class="register-container">
+    <form id="registerForm" asp-action="Register" method="post">
+
+        <h2 class="register-title">Registro de Usuario</h2>
+
+        @* Name Input *@
+        <label asp-for="Name">Nombre</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+
+        @* LastName Input *@
+        <label asp-for="LastName">Apellido</label>
+        <input asp-for="LastName" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+
+        @* Email Input *@
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+
+        @* Password Input *@
+        <label asp-for="Password">Contraseña</label>
+        <input asp-for="Password" type="password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+
+        @* Submit Button *@
+        <button type="submit">Registrar</button>
+    </form>
+</div>

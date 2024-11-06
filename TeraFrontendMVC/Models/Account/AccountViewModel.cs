@@ -32,6 +32,6 @@ namespace TeraFrontendMVC.Models.Account
         [Required]
         public string OldPassword { get; set; }
         [Required]
-        public string CurrentPassword { get; set; }
+        public string NewPassword { get; set; }
     }
 }
