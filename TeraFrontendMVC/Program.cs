@@ -7,7 +7,7 @@ builder.Services.AddControllersWithViews();
 
 // Configura HttpClient para que use el nombre del servicio del backend en Docker
 var backendBaseUrl = builder.Configuration.GetValue<string>("BackendSettings:BaseUrl");
-builder.Services.AddHttpClient<Users>(client =>
+builder.Services.AddHttpClient<ResultsController>(client =>
 {
     client.BaseAddress = new Uri(backendBaseUrl);
 });

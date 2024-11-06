@@ -5,15 +5,16 @@ using System.Diagnostics;
 using System.Drawing.Printing;
 using System.Net.Http;
 using TeraFrontendMVC.Models;
+using TeraFrontendMVC.Models.Results;
 
 namespace TeraFrontendMVC.Controllers
 {
     public class HomeController : Controller
     {
         private readonly HttpClient _httpClient;
-        private readonly ILogger<Users> _logger;
+        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(HttpClient httpClient, ILogger<Users> logger)
+        public HomeController(HttpClient httpClient, ILogger<HomeController> logger)
         {
             _httpClient = httpClient;
             _logger = logger;

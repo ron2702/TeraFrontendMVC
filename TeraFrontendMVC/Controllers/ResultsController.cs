@@ -3,16 +3,17 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Globalization;
 using System.Text.Json;
-using TeraFrontendMVC.Models;
+using TeraFrontendMVC.Models.Region;
+using TeraFrontendMVC.Models.Results;
 
 namespace TeraFrontendMVC.Controllers
 {
     public class ResultsController : Controller
     {
         private readonly HttpClient _httpClient;
-        private readonly ILogger<Users> _logger;
+        private readonly ILogger<ResultsController> _logger;
 
-        public ResultsController(HttpClient httpClient, ILogger<Users> logger)
+        public ResultsController(HttpClient httpClient, ILogger<ResultsController> logger)
         {
             _httpClient = httpClient;
             _logger = logger;

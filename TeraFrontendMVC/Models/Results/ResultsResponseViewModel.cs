@@ -1,4 +1,4 @@
-﻿namespace TeraFrontendMVC.Models
+﻿namespace TeraFrontendMVC.Models.Results
 {
     public class ResultsResponseViewModel
     {
