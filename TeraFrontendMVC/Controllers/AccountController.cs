@@ -1,30 +1,21 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System.Text;
 using TeraFrontendMVC.Models.Account;
 
 namespace TeraFrontendMVC.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Account/Login
-        [HttpGet]
-        public IActionResult Login()
-        {
-            return View();
-        }
 
-        // POST: Account/Login
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Login(Login model)
-        {
-            if (ModelState.IsValid)
-            {
-                // Lógica de autenticación aquí
-                return RedirectToAction("Index", "Home"); // Redirige a la página principal si es exitoso
-            }
+        private readonly HttpClient _httpClient;
+        private readonly ILogger<AccountController> _logger;
 
-            return View(model); // Si hay errores, vuelve a mostrar el formulario
+        public AccountController(HttpClient httpClient, ILogger<AccountController> logger)
+        {
+            _httpClient = httpClient;
+            _logger = logger;
         }
 
         // GET: Account/Register
@@ -36,8 +27,37 @@ namespace TeraFrontendMVC.Controllers
 
         // POST: Account/Register
         [HttpPost]
+        public async Task<IActionResult> Register(Register model)
+        {
+            if (ModelState.IsValid)
+            {
+                var jsonContent = JsonConvert.SerializeObject(model);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                var response = await _httpClient.PostAsync("http://web/api/Usuarios/registrar-usuario", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                ModelState.AddModelError(string.Empty, errorMessage);
+            }
+
+            return View(model);
+        }
+
+        // GET: Account/Login
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        // POST: Account/Login
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Register(Register model)
+        public IActionResult Login(Login model)
         {
             if (ModelState.IsValid)
             {

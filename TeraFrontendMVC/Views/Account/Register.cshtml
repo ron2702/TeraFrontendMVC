@@ -5,15 +5,26 @@
 
         <h2 class="register-title">Registro de Usuario</h2>
 
+        @* Mostrar errores generales *@
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @foreach (var error in ViewData.ModelState[string.Empty]?.Errors)
+                {
+                    <span>@error.ErrorMessage</span>
+                }
+            </div>
+        }
+
         @* Name Input *@
-        <label asp-for="Name">Nombre</label>
-        <input asp-for="Name" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+        <label asp-for="Nombre">Nombre</label>
+        <input asp-for="Nombre" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
 
         @* LastName Input *@
-        <label asp-for="LastName">Apellido</label>
-        <input asp-for="LastName" />
-        <span asp-validation-for="LastName" class="text-danger"></span>
+        <label asp-for="Apellido">Apellido</label>
+        <input asp-for="Apellido" />
+        <span asp-validation-for="Apellido" class="text-danger"></span>
 
         @* Email Input *@
         <label asp-for="Email"></label>
@@ -29,3 +40,9 @@
         <button type="submit">Registrar</button>
     </form>
 </div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

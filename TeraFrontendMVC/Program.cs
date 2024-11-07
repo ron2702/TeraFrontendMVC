@@ -12,6 +12,11 @@ builder.Services.AddHttpClient<ResultsController>(client =>
     client.BaseAddress = new Uri(backendBaseUrl);
 });
 
+builder.Services.AddHttpClient<AccountController>(client =>
+{
+    client.BaseAddress = new Uri(backendBaseUrl);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

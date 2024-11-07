@@ -5,13 +5,15 @@ namespace TeraFrontendMVC.Models.Account
     public class Register
     {
         [Required]
-        public string Name { get; set; }
+        public string Nombre { get; set; }
         [Required]
-        public string LastName { get; set; }
+        public string Apellido { get; set; }
         [Required]
         [EmailAddress]
         public string Email { get; set; }
         [Required]
+        [MinLength(8)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$", ErrorMessage = "La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula, un número y un carácter especial.")]
         public string Password { get; set; }
     }
 
@@ -30,8 +32,8 @@ namespace TeraFrontendMVC.Models.Account
         [EmailAddress]
         public string Email { get; set; }
         [Required]
-        public string OldPassword { get; set; }
+        public string PasswordActual { get; set; }
         [Required]
-        public string NewPassword { get; set; }
+        public string PasswordNuevo { get; set; }
     }
 }
