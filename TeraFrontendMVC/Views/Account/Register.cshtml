@@ -17,22 +17,22 @@
         }
 
         @* Name Input *@
-        <label asp-for="Nombre">Nombre</label>
+        <label class="custom-form-label" asp-for="Nombre">Nombre</label>
         <input asp-for="Nombre" />
         <span asp-validation-for="Nombre" class="text-danger"></span>
 
         @* LastName Input *@
-        <label asp-for="Apellido">Apellido</label>
+        <label class="custom-form-label" asp-for="Apellido">Apellido</label>
         <input asp-for="Apellido" />
         <span asp-validation-for="Apellido" class="text-danger"></span>
 
         @* Email Input *@
-        <label asp-for="Email"></label>
+        <label class="custom-form-label" asp-for="Email"></label>
         <input asp-for="Email" />
         <span asp-validation-for="Email" class="text-danger"></span>
 
         @* Password Input *@
-        <label asp-for="Password">Contraseña</label>
+        <label class="custom-form-label" asp-for="Password">Contraseña</label>
         <input asp-for="Password" type="password" />
         <span asp-validation-for="Password" class="text-danger"></span>
 

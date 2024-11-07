@@ -2,7 +2,7 @@
 
 .form-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0.6fr 1fr;
 }
 
 .login-container, .account-container {
@@ -61,7 +61,7 @@ button[type="submit"] {
     }
 
 /* Label Styles */
-label {
+.custom-form-label {
     font-weight: bold;
     color: #333333;
     display: block;
@@ -78,7 +78,19 @@ label {
     line-height: 1.6;
 }
 
-.main-text-container p {
+.welcome-title {
+    text-align: center;
+    font-size: 1.35rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+    .welcome-title span {
+        font-weight: bold;
+        color: #4CAF50;
+    }
+
+.information-text {
     font-size: 1.35rem;
     font-weight: bold;
     margin-bottom: 20px;
@@ -98,7 +110,7 @@ label {
 
         .new-account-container p a,
         .forget-password-container p a {
-            color: #007bff;
+            color: #4CAF50;
             font-weight: bold;
             text-decoration: none;
         }

@@ -7,12 +7,12 @@
             <h2 class="login-title">Iniciar Sesión</h2>
 
             @* Email Input *@
-            <label asp-for="Email"></label>
+            <label class="custom-form-label" asp-for="Email"></label>
             <input asp-for="Email" />
             <span asp-validation-for="Email" class="text-danger"></span>
 
             @* Password Input *@
-            <label asp-for="Password">Contraseña</label>
+            <label class="custom-form-label" asp-for="Password">Contraseña</label>
             <input asp-for="Password" type="password" />
             <span asp-validation-for="Password" class="text-danger"></span>
 
@@ -22,8 +22,11 @@
     </div>
     <div class="account-container">
         <div class="main-text-container">
-            <p>
-                Bienvenido a la plataforma Elección 2024, Accede a datos electorales, consulta resultados regionales y 
+            <p class="welcome-title">
+                Bienvenido a la plataforma <span>Elección 2024</span>
+            </p>
+            <p class="information-text">
+                Accede a datos electorales, consulta resultados regionales y
                 colabora en la construcción de una visión transparente para Elección 2024. Solo necesitas una cuenta para ser parte.
             </p>
         </div>

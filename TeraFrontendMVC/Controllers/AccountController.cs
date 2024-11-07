@@ -56,7 +56,6 @@ namespace TeraFrontendMVC.Controllers
 
         // POST: Account/Login
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult Login(Login model)
         {
             if (ModelState.IsValid)
@@ -76,7 +75,6 @@ namespace TeraFrontendMVC.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult ChangePassword(ChangePassword model)
         {
             if (ModelState.IsValid)

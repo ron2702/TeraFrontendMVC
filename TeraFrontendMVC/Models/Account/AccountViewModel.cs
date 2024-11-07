@@ -4,14 +4,17 @@ namespace TeraFrontendMVC.Models.Account
 {
     public class Register
     {
-        [Required]
+        [Required(ErrorMessage = "Campo Requerido")]
         public string Nombre { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Campo Requerido")]
         public string Apellido { get; set; }
-        [Required]
-        [EmailAddress]
+
+        [Required(ErrorMessage = "Campo Requerido")]
+        [EmailAddress(ErrorMessage = "El formato del correo no es correcto")]
         public string Email { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Campo Requerido")]
         [MinLength(8)]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$", ErrorMessage = "La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula, un número y un carácter especial.")]
         public string Password { get; set; }
@@ -19,21 +22,26 @@ namespace TeraFrontendMVC.Models.Account
 
     public class Login
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Campo Requerido")]
+        [EmailAddress(ErrorMessage = "El formato del correo no es correcto")]
         public string Email { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Campo Requerido")]
         public string Password { get; set; }
     }
 
     public class ChangePassword
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Campo Requerido")]
+        [EmailAddress(ErrorMessage = "El formato del correo no es correcto")]
         public string Email { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Campo Requerido")]
         public string PasswordActual { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Campo Requerido")]
+        [MinLength(8)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$", ErrorMessage = "La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula, un número y un carácter especial.")]
         public string PasswordNuevo { get; set; }
     }
 }
