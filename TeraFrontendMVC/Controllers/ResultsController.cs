@@ -22,6 +22,14 @@ namespace TeraFrontendMVC.Controllers
         // GET: Results
         public async Task<IActionResult> Index()
         {
+
+            var token = HttpContext.Session.GetString("AuthToken");
+
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             // Obtener los estados, municipios y parroquias reutilizando los métodos privados
             var states = await GetStates(null);
             var municipalities = new List<MunicipalityViewModel>();
@@ -44,10 +52,20 @@ namespace TeraFrontendMVC.Controllers
 
             try
             {
+                var token = HttpContext.Session.GetString("AuthToken");
+
+                if (string.IsNullOrEmpty(token))
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+
                 string url = $"http://web/api/Resultados/resultados?codEdo={codEdo}&munId={munId}&codPar={codPar}&pageSize={pageSize}&pageNumber={pageNumber}";
 
                 using (HttpClient client = new HttpClient())
                 {
+
+                    client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
                     var response = await client.GetAsync(url);
 
                     if (response.IsSuccessStatusCode)
@@ -117,6 +135,11 @@ namespace TeraFrontendMVC.Controllers
 
                 // Eliminar el último '&' sobrante o '?'
                 queryString = queryString.TrimEnd('&', '?');
+
+                // Enviar authToken en el header
+                var token = HttpContext.Session.GetString("AuthToken");
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
                 var response = await _httpClient.GetAsync(queryString);
                 if (response.IsSuccessStatusCode)
                 {
@@ -158,6 +181,10 @@ namespace TeraFrontendMVC.Controllers
 
                 // Eliminar el último '&' sobrante o '?'
                 queryString = queryString.TrimEnd('&', '?');
+
+                // Enviar authToken en el header
+                var token = HttpContext.Session.GetString("AuthToken");
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                 // Realiza la solicitud al backend con los parámetros necesarios
                 var response = await _httpClient.GetAsync(queryString);
@@ -202,6 +229,10 @@ namespace TeraFrontendMVC.Controllers
 
                 // Eliminar el último '&' sobrante o '?'
                 queryString = queryString.TrimEnd('&', '?');
+
+                // Enviar authToken en el header
+                var token = HttpContext.Session.GetString("AuthToken");
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
                 // Realiza la solicitud al backend con los parámetros necesarios
                 var response = await _httpClient.GetAsync(queryString);

@@ -22,7 +22,7 @@ namespace TeraFrontendMVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            string url = $"http://web/api/Resultados/resultados";
+            string url = $"http://web/api/Resultados/total-resultados";
             using (HttpClient client = new HttpClient())
             {
                 var response = await client.GetAsync(url);
