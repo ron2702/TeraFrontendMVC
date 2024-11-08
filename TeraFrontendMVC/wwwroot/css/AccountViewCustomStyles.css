@@ -136,6 +136,24 @@ button[type="submit"] {
                 text-decoration: underline;
             }
 
+.password-container {
+    position: relative;
+    width: 100%; /* Ajusta el ancho según lo necesites */
+}
+
+    .password-container input {
+        width: 100%; /* El campo de texto ocupa todo el ancho disponible */
+        padding-right: 30px; /* Espacio a la derecha para el ícono */
+    }
+
+    .password-container i {
+        position: absolute;
+        right: 10px; /* Distancia desde el borde derecho */
+        top: 50%;
+        transform: translateY(-50%); /* Centra el ícono verticalmente */
+        cursor: pointer;
+    }
+
 @media (max-width: 995px) {
     .account-container {
         padding: 15px;

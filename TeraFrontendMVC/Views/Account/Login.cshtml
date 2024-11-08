@@ -24,7 +24,10 @@
 
             @* Password Input *@
             <label class="custom-form-label" asp-for="Password">Contraseña</label>
-            <input asp-for="Password" type="password" />
+            <div class="password-container">
+                <input asp-for="Password" type="password" id="passwordInput" />
+                <i id="togglePassword" class="fa fa-eye"></i>
+            </div>
             <span asp-validation-for="Password" class="text-danger"></span>
 
             @* Submit Button *@
@@ -52,4 +55,8 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        togglePasswordVisibility('passwordInput', 'togglePassword');
+    </script>
 }
