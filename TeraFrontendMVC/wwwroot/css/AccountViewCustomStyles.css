@@ -1,5 +1,21 @@
 ﻿/* Login */
 
+.logout-btn {
+    border: 2px solid black;
+    background-color: white;
+    color: black;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 5px !important;
+    margin-top: 0 !important;
+}
+
+.success {
+    border-color: #04AA6D;
+    color: green;
+}
+
 .form-container {
     display: grid;
     grid-template-columns: 0.6fr 1fr;
