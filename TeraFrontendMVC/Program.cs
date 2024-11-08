@@ -5,45 +5,65 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// Configura HttpClient para que use el nombre del servicio del backend en Docker
-var backendBaseUrl = builder.Configuration.GetValue<string>("BackendSettings:BaseUrl");
-builder.Services.AddHttpClient<ResultsController>(client =>
-{
-    client.BaseAddress = new Uri(backendBaseUrl);
-});
+// Configure session options
+ConfigureSession(builder.Services);
 
-builder.Services.AddHttpClient<AccountController>(client =>
-{
-    client.BaseAddress = new Uri(backendBaseUrl);
-});
+// Configure HttpClient services
+ConfigureHttpClients(builder.Services, builder.Configuration);
 
-builder.Services.AddSession(options =>
-{
-    options.IdleTimeout = TimeSpan.FromHours(24);
-    options.Cookie.HttpOnly = true; // Increases cookie security
-    options.Cookie.IsEssential = true; // Allows the session cookie when the user has not consented to it
-});
-
+// Build the app
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-}
-app.UseStaticFiles();
-
-app.UseSession();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-// Configure the app to listen on port 80
-app.Urls.Add("http://*:80"); // Asegúrate de que la aplicación escuche en el puerto 80
-
-app.MapControllerRoute(
-    name: "Home",
-    pattern: "{controller=Home}/{action=Index}");
+ConfigurePipeline(app);
 
 app.Run();
+
+// Method to configure HttpClient services for each controller
+void ConfigureHttpClients(IServiceCollection services, IConfiguration configuration)
+{
+    var backendBaseUrl = configuration.GetValue<string>("BackendSettings:BaseUrl");
+
+    // Registering HttpClient with the same base URL for each controller
+    services.AddHttpClient<ResultsController>(client =>
+    {
+        client.BaseAddress = new Uri(backendBaseUrl);
+    });
+
+    services.AddHttpClient<AccountController>(client =>
+    {
+        client.BaseAddress = new Uri(backendBaseUrl);
+    });
+}
+
+// Method to configure session options
+void ConfigureSession(IServiceCollection services)
+{
+    services.AddSession(options =>
+    {
+        options.IdleTimeout = TimeSpan.FromHours(24);
+        options.Cookie.HttpOnly = true; // Increases cookie security
+        options.Cookie.IsEssential = true; // Allows the session cookie when the user has not consented to it
+    });
+}
+
+// Method to configure the app's request pipeline
+void ConfigurePipeline(WebApplication app)
+{
+    if (!app.Environment.IsDevelopment())
+    {
+        app.UseExceptionHandler("/Home/Error");
+    }
+
+    app.UseStaticFiles();
+    app.UseSession();
+    app.UseRouting();
+    app.UseAuthorization();
+
+    // Configure the app to listen on port 80
+    app.Urls.Add("http://*:80");
+
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+}
