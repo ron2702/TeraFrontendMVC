@@ -5,9 +5,12 @@
 <div class="text-center">
     <h1>@ViewData["Title"]</h1>
     <p>Aqui visualizarás los resultados de las elecciones presidenciales que ocurrieron en Venezuela el 28 de Julio del 2024.</p>
-    <div class="view-results-link text-center">
-        <a href="/Results">Ver Resultados Detallados</a>
-    </div>
+    @if (!string.IsNullOrEmpty(Context.Session.GetString("AuthToken")))
+    {
+        <div class="view-results-link text-center">
+            <a href="/Results">Ver Resultados Detallados</a>
+        </div>
+    }
 </div>
 
 <div class="results-summary text-center">

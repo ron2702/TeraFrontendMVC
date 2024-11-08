@@ -17,6 +17,13 @@ builder.Services.AddHttpClient<AccountController>(client =>
     client.BaseAddress = new Uri(backendBaseUrl);
 });
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromHours(24);
+    options.Cookie.HttpOnly = true; // Increases cookie security
+    options.Cookie.IsEssential = true; // Allows the session cookie when the user has not consented to it
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,6 +32,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
 }
 app.UseStaticFiles();
+
+app.UseSession();
 
 app.UseRouting();
 

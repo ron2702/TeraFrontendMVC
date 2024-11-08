@@ -28,15 +28,33 @@
                         <li>
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Results" asp-action="Index">Resultados</a>
-                        </li>
+                        @if (!string.IsNullOrEmpty(Context.Session.GetString("AuthToken")))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Results" asp-action="Index">Resultados</a>
+                            </li>
+                        }
                     </ul>
 
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Iniciar Sesión</a>
-                        </li>
+
+                        @{
+                            var token = Context.Session.GetString("AuthToken");
+                            if (!string.IsNullOrEmpty(token))
+                            {
+                                <li class="nav-item">
+                                    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
+                                        <button type="submit" class="nav-link btn btn-link text-dark p-0">Cerrar Sesión</button>
+                                    </form>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Iniciar Sesión</a>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
 

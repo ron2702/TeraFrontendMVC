@@ -6,6 +6,17 @@
 
             <h2 class="login-title">Iniciar Sesión</h2>
 
+            @if (ViewData.ModelState.ContainsKey(string.Empty) && ViewData.ModelState[string.Empty]?.Errors.Any() == true)
+            {
+                <div class="alert alert-danger">
+                    @foreach (var error in ViewData.ModelState[string.Empty].Errors)
+                    {
+                        <span>@error.ErrorMessage</span>
+                    }
+                </div>
+            }
+
+        
             @* Email Input *@
             <label class="custom-form-label" asp-for="Email"></label>
             <input asp-for="Email" />
