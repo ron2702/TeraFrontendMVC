@@ -22,6 +22,13 @@ namespace TeraFrontendMVC.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            var checkToken = HttpContext.Session.GetString("AuthToken");
+
+            if (!string.IsNullOrEmpty(checkToken))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -51,6 +58,13 @@ namespace TeraFrontendMVC.Controllers
         [HttpGet]
         public IActionResult ChangePassword()
         {
+            var checkToken = HttpContext.Session.GetString("AuthToken");
+
+            if (!string.IsNullOrEmpty(checkToken))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
@@ -82,6 +96,13 @@ namespace TeraFrontendMVC.Controllers
         [HttpGet]
         public IActionResult Login()
         {
+            var checkToken = HttpContext.Session.GetString("AuthToken");
+
+            if (!string.IsNullOrEmpty(checkToken))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
