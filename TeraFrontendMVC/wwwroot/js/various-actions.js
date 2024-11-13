@@ -23,5 +23,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+    const dangerAlert = document.querySelector('.alert-danger');
+    if (dangerAlert) {
+        setTimeout(() => {
+            dangerAlert.style.display = 'none';
+        }, 4000);
+    }
+});
+
 // Llama a esta función para cada campo de contraseña que necesite el toggle
 // togglePasswordVisibility('passwordInput', 'togglePassword');
