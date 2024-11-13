@@ -14,5 +14,14 @@ function togglePasswordVisibility(inputId, iconId) {
     }
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+    const successAlert = document.querySelector('.alert-info');
+    if (successAlert) {
+        setTimeout(() => {
+            successAlert.style.display = 'none';
+        }, 4000);
+    }
+});
+
 // Llama a esta función para cada campo de contraseña que necesite el toggle
 // togglePasswordVisibility('passwordInput', 'togglePassword');

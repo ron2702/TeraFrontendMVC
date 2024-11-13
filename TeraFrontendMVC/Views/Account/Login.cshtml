@@ -1,5 +1,13 @@
 ﻿@model TeraFrontendMVC.Models.Account.Login
 
+@if (TempData["SucessMessage"] != null)
+{
+    <div class="success-container alert alert-info alert-dismissible fade show" role="alert">
+        @TempData["SucessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
 <div class="form-container">
     <div class="login-container">
         <form id="loginForm" asp-action="Login" method="post">
@@ -16,7 +24,7 @@
                 </div>
             }
 
-        
+            
             @* Email Input *@
             <label class="custom-form-label" asp-for="Email"></label>
             <input asp-for="Email" />

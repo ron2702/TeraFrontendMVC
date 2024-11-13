@@ -44,6 +44,7 @@ namespace TeraFrontendMVC.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
+                    TempData["SucessMessage"] = "Usuario registrado con éxito";
                     return RedirectToAction("Login", "Account");
                 }
 
@@ -80,6 +81,7 @@ namespace TeraFrontendMVC.Controllers
 
                 if (response.IsSuccessStatusCode)
                 {
+                    TempData["SucessMessage"] = "Contraseña cambiada con éxito";
                     return RedirectToAction("Login", "Account");
                 }
 
@@ -87,7 +89,6 @@ namespace TeraFrontendMVC.Controllers
                 ModelState.AddModelError(string.Empty, errorMessage);
             }
 
-            // Asegúrate de devolver el modelo al regresar a la vista
             return View(model);
         }
 
