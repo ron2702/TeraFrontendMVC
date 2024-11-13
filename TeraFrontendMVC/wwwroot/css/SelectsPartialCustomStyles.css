@@ -10,13 +10,18 @@
     margin: 10px 5px;
 }
 
-#selectContainer label {
-    margin-right: 10px;
-    font-weight: bold;
-}
+    #selectContainer select {
+        background-color: #393939;
+        color: white;
+    }
+
+    #selectContainer label {
+        margin-right: 10px;
+        font-weight: bold;
+    }
 
 #btnBuscar {
-    background-color: #4CAF50;
+    background-color: #45a049;
     border: none;
     color: white;
     padding: 5px 10px;

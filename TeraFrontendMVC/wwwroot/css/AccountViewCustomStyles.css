@@ -30,7 +30,7 @@
     height: 100%;
     /*max-width: 400px;*/
     padding: 2rem;
-    background-color: #ffffff;
+    background-color: #3d3d3d;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
@@ -62,7 +62,7 @@ button[type="submit"] {
     width: 100%;
     padding: 0.75rem;
     margin-top: 1rem;
-    background-color: #4CAF50;
+    background-color: #45a049;
     color: #ffffff;
     font-size: 1rem;
     font-weight: bold;
@@ -79,13 +79,13 @@ button[type="submit"] {
 /* Label Styles */
 .custom-form-label {
     font-weight: bold;
-    color: #333333;
+    color: white;
     display: block;
     margin-top: 1rem;
 }
 
 .account-container {
-    background-color: #f9f9f9;
+    background-color: #3d3d3d;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -99,6 +99,7 @@ button[type="submit"] {
     font-size: 1.35rem;
     font-weight: bold;
     margin-bottom: 20px;
+    color: white;
 }
 
     .welcome-title span {
@@ -111,6 +112,7 @@ button[type="submit"] {
     font-weight: bold;
     margin-bottom: 20px;
     text-align: justify;
+    color: white;
 }
 
 .new-account-container, .forget-password-container {
@@ -118,6 +120,7 @@ button[type="submit"] {
     margin-top: 15px;
     font-size: 1rem;
     font-weight: 400;
+    color: white;
 }
 
     .new-account-container p, .forget-password-container p {
@@ -126,7 +129,7 @@ button[type="submit"] {
 
         .new-account-container p a,
         .forget-password-container p a {
-            color: #4CAF50;
+            color: #45a049;
             font-weight: bold;
             text-decoration: none;
         }
@@ -152,6 +155,7 @@ button[type="submit"] {
         top: 50%;
         transform: translateY(-50%); /* Centra el ícono verticalmente */
         cursor: pointer;
+        color: #3d3d3d;
     }
 
 @media (max-width: 995px) {
@@ -175,7 +179,7 @@ button[type="submit"] {
     height: 100%;
     max-width: 400px;
     padding: 2rem;
-    background-color: #ffffff;
+    background-color: #3d3d3d;
     border-radius: 8px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
