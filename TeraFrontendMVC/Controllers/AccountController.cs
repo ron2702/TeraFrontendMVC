@@ -61,9 +61,9 @@ namespace TeraFrontendMVC.Controllers
         {
             var checkToken = HttpContext.Session.GetString("AuthToken");
 
-            if (!string.IsNullOrEmpty(checkToken))
+            if (string.IsNullOrEmpty(checkToken))
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
 
             return View();
@@ -75,17 +75,36 @@ namespace TeraFrontendMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var jsonContent = JsonConvert.SerializeObject(model);
-                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-                var response = await _httpClient.PostAsync("http://web/api/Usuarios/modificar-contrasena", content);
+                var changpwdjson = JsonConvert.SerializeObject(model);
+                var changepwdcontent = new StringContent(changpwdjson, Encoding.UTF8, "application/json");
+                var responseChangpwd = await _httpClient.PostAsync("http://web/api/Usuarios/modificar-contrasena", changepwdcontent);
 
-                if (response.IsSuccessStatusCode)
+                if (responseChangpwd.IsSuccessStatusCode)
                 {
-                    TempData["SucessMessage"] = "Contraseña cambiada con éxito";
-                    return RedirectToAction("Login", "Account");
+
+                    var token = HttpContext.Session.GetString("AuthToken");
+
+                    if (string.IsNullOrEmpty(token))
+                    {
+                        return RedirectToAction("Login", "Account");
+                    }
+
+                    var jsonContent = JsonConvert.SerializeObject(token);
+                    var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                    var response = await _httpClient.PostAsync("http://web/api/Usuarios/logout", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        // Elimina el token de la sesión si el backend respondió correctamente
+                        HttpContext.Session.Remove("AuthToken");
+                        TempData["SucessMessage"] = "Contraseña cambiada con éxito. Vuelva a iniciar sesión";
+                        return RedirectToAction("Login", "Account");
+                    }
+
                 }
 
-                var errorMessage = await response.Content.ReadAsStringAsync();
+                var errorMessage = await responseChangpwd.Content.ReadAsStringAsync();
                 ModelState.AddModelError(string.Empty, errorMessage);
             }
 

@@ -18,14 +18,18 @@ html {
 }
 
 header {
-    background-color: #393939 !important; /* Cambia este valor al tono de gris que prefieras */
-    color: #f0f0f0 !important; /* Ajusta el color del texto si es necesario */
+    background-color: #393939 !important;
+    color: #f0f0f0 !important;
 }
 
 body {
     margin-bottom: 10px;
-    background-color: #393939; /* Cambia este valor al tono de gris que prefieras */
-    color: #f0f0f0; /* Ajusta el color del texto si es necesario */
+    background-color: #393939;
+    color: #f0f0f0;
+}
+
+.navbar .dropdown-menu {
+    min-width: auto;
 }
 
 .header-nav-a-link {
@@ -35,4 +39,17 @@ body {
 
     .header-nav-a-link:hover {
         color: #45a049;
+    }
+
+.ul-menu-container {
+    background-color: #393939;
+}
+
+.ul-menu-container li a {
+    color: white;
+}
+
+    .ul-menu-container li a:hover {
+        color: #45a049;
+        background-color: #393939;
     }

@@ -43,11 +43,25 @@
                             var token = Context.Session.GetString("AuthToken");
                             if (!string.IsNullOrEmpty(token))
                             {
-                                <li class="nav-item">
-                                    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
-                                        <button type="submit" class="logout-btn success">Cerrar Sesión</button>
-                                    </form>
+                                <li class="nav-item dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle"
+                                            type="button"
+                                            id="settingsDropdown"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        Configuración
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end ul-menu-container" aria-labelledby="settingsDropdown">
+                                        <li>
+                                            <a asp-area="" asp-controller="Account" asp-action="ChangePassword" class="dropdown-item">Cambiar Contraseña</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="dropdown-item" onclick="document.getElementById('logoutForm').submit()">Cerrar Sesión</a>
+                                            <form id="logoutForm" asp-area="" asp-controller="Account" asp-action="Logout" method="post" style="display: none;"></form>
+                                        </li>
+                                    </ul>
                                 </li>
+
                             }
                             else
                             {
