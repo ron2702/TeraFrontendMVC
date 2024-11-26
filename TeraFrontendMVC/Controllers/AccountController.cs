@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
+using TeraFrontendMVC.Filter;
 using TeraFrontendMVC.Models.Account;
 
 namespace TeraFrontendMVC.Controllers
@@ -20,15 +21,9 @@ namespace TeraFrontendMVC.Controllers
 
         // GET: Account/Register
         [HttpGet]
+        [ServiceFilter(typeof(RedirectIfAuthenticatedFilter))]
         public IActionResult Register()
         {
-            var checkToken = HttpContext.Session.GetString("AuthToken");
-
-            if (!string.IsNullOrEmpty(checkToken))
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
             return View();
         }
 
@@ -57,6 +52,7 @@ namespace TeraFrontendMVC.Controllers
 
         // GET: Account/ChangePassword
         [HttpGet]
+        [ServiceFilter(typeof(RedirectIfNotAuthenticatedFilter))]
         public IActionResult ChangePassword()
         {
             var checkToken = HttpContext.Session.GetString("AuthToken");
@@ -114,15 +110,9 @@ namespace TeraFrontendMVC.Controllers
 
         // GET: Account/Login
         [HttpGet]
+        [ServiceFilter(typeof(RedirectIfAuthenticatedFilter))]
         public IActionResult Login()
         {
-            var checkToken = HttpContext.Session.GetString("AuthToken");
-
-            if (!string.IsNullOrEmpty(checkToken))
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
             return View();
         }
 

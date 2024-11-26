@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Globalization;
 using System.Text.Json;
+using TeraFrontendMVC.Filter;
 using TeraFrontendMVC.Models.Region;
 using TeraFrontendMVC.Models.Results;
 
@@ -20,16 +21,9 @@ namespace TeraFrontendMVC.Controllers
         }
 
         // GET: Results
+        [ServiceFilter(typeof(RedirectIfNotAuthenticatedFilter))]
         public async Task<IActionResult> Index()
         {
-
-            var token = HttpContext.Session.GetString("AuthToken");
-
-            if (string.IsNullOrEmpty(token))
-            {
-                return RedirectToAction("Login", "Account");
-            }
-
             // Obtener los estados, municipios y parroquias reutilizando los métodos privados
             var states = await GetStates(null);
             var municipalities = new List<MunicipalityViewModel>();
@@ -47,17 +41,13 @@ namespace TeraFrontendMVC.Controllers
         }
 
         [HttpGet]
+        [ServiceFilter(typeof(RedirectIfNotAuthenticatedFilter))]
         public async Task<IActionResult> Buscar(int? codEdo, int? munId, int? codPar, int? pageSize, int? pageNumber)
         {
 
             try
             {
                 var token = HttpContext.Session.GetString("AuthToken");
-
-                if (string.IsNullOrEmpty(token))
-                {
-                    return RedirectToAction("Login", "Account");
-                }
 
                 string url = $"http://web/api/Resultados/resultados?codEdo={codEdo}&munId={munId}&codPar={codPar}&pageSize={pageSize}&pageNumber={pageNumber}";
 

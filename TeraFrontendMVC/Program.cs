@@ -1,15 +1,11 @@
 using TeraFrontendMVC.Controllers;
+using TeraFrontendMVC.Filter;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
-// Configure session options
-ConfigureSession(builder.Services);
-
-// Configure HttpClient services
-ConfigureHttpClients(builder.Services, builder.Configuration);
+ConfigureServices(builder.Services, builder.Configuration);
 
 // Build the app
 var app = builder.Build();
@@ -18,6 +14,18 @@ var app = builder.Build();
 ConfigurePipeline(app);
 
 app.Run();
+
+// Method to configure services, add sessions, and filters
+void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+{
+    ConfigureSession(services);
+    ConfigureHttpClients(services, configuration);
+
+    // Register custom filters
+    services.AddScoped<RedirectIfAuthenticatedFilter>();
+    services.AddScoped<RedirectIfNotAuthenticatedFilter>();
+}
+
 
 // Method to configure HttpClient services for each controller
 void ConfigureHttpClients(IServiceCollection services, IConfiguration configuration)
