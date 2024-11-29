@@ -37,7 +37,7 @@
 }
 
 .login-title, .register-title, .change-pwd-title {
-    color: #45a049;
+    color: #ffc100;
 }
 
 /* Input Styles */
@@ -62,7 +62,7 @@ button[type="submit"] {
     width: 100%;
     padding: 0.75rem;
     margin-top: 1rem;
-    background-color: #45a049;
+    background-color: #2d488c;
     color: #ffffff;
     font-size: 1rem;
     font-weight: bold;
@@ -73,7 +73,7 @@ button[type="submit"] {
 }
 
     button[type="submit"]:hover {
-        background-color: #45a049;
+        background-color: #081360;
     }
 
 /* Label Styles */
@@ -104,7 +104,7 @@ button[type="submit"] {
 
     .welcome-title span {
         font-weight: bold;
-        color: #4CAF50;
+        color: #edc130;
     }
 
 .information-text {
@@ -129,7 +129,7 @@ button[type="submit"] {
 
         .new-account-container p a,
         .forget-password-container p a {
-            color: #45a049;
+            color: #edc130;
             font-weight: bold;
             text-decoration: none;
         }

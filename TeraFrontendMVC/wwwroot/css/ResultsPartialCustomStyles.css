@@ -4,18 +4,18 @@
     font-weight: bold;
 }
     .view-results-link a {
-        color: #45a049;
+        color: #edc130;
     }
 
     .total-votes {
         margin: 20px 0;
     }
 
-    .total-votes p {
-        font-size: 24px;
-        color: #45a049;
-        font-weight: 700;
-    }
+        .total-votes p {
+            font-size: 24px;
+            color: #edc130;
+            font-weight: 700;
+        }
 
     /* Estilo para la tabla de resultados */
 #TitleContainer p {
@@ -57,6 +57,12 @@
         color: white;
     }
 
+
+#rows-amount select {
+    background-color: #393939;
+    color: white;
+}
+
 #resultadosTable {
     width: 100%;
     border-collapse: collapse;
@@ -69,7 +75,7 @@
 }
 
     #resultadosTable th {
-        background-color: #45a049;
+        background-color: #e6ac00;
         text-align: center;
         color: white;
     }
@@ -89,11 +95,11 @@
     text-align: center;
 }
 
-#votosTotalesTable th {
-    background-color: #4CAF50;
-    text-align: center;
-    color: white;
-}
+    #votosTotalesTable th {
+        background-color: #010194;
+        text-align: center;
+        color: white;
+    }
 
     #votosTotalesTable tr:hover {
         background-color: #5c5c5c;
@@ -120,16 +126,16 @@
         margin: 0 5px;
         font-size: 16px;
         font-weight: bold;
-        border: 1px solid #4CAF50;
+        border: 1px solid #e6ac00;
         border-radius: 5px;
-        background-color: #4CAF50;
+        background-color: #e6ac00;
         color: #ffffff;
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
 
         .pagination button:hover {
-            background-color: #45a049;
+            background-color: #cc9900;
         }
 
     .pagination span {
