@@ -21,7 +21,6 @@ namespace TeraFrontendMVC.Controllers
         }
 
         // GET: Results
-        [ServiceFilter(typeof(RedirectIfNotAuthenticatedFilter))]
         public async Task<IActionResult> Index()
         {
             // Obtener los estados, municipios y parroquias reutilizando los métodos privados
@@ -41,7 +40,6 @@ namespace TeraFrontendMVC.Controllers
         }
 
         [HttpGet]
-        [ServiceFilter(typeof(RedirectIfNotAuthenticatedFilter))]
         public async Task<IActionResult> Buscar(int? codEdo, int? munId, int? codPar, int? pageSize, int? pageNumber)
         {
 

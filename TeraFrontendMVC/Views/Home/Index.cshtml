@@ -1,8 +1,19 @@
 ﻿@{
     ViewData["Title"] = "Elecciones 2024";
+    var errorMessage = Context.Session.GetString("ErrorMessage");
+    Context.Session.Remove("ErrorMessage");
 }
 
 <div class="text-center">
+
+    @if (!string.IsNullOrEmpty(errorMessage))
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @errorMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
     <h1>@ViewData["Title"]</h1>
     <p>Aqui visualizarás los resultados de las elecciones presidenciales que ocurrieron en Venezuela el 28 de Julio del 2024.</p>
     @if (!string.IsNullOrEmpty(Context.Session.GetString("AuthToken")))

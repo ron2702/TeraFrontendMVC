@@ -20,10 +20,6 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
 {
     ConfigureSession(services);
     ConfigureHttpClients(services, configuration);
-
-    // Register custom filters
-    services.AddScoped<RedirectIfAuthenticatedFilter>();
-    services.AddScoped<RedirectIfNotAuthenticatedFilter>();
 }
 
 
@@ -66,6 +62,10 @@ void ConfigurePipeline(WebApplication app)
     app.UseStaticFiles();
     app.UseSession();
     app.UseRouting();
+
+    // Auth custom middleware
+    app.UseMiddleware<AuthorizationMiddleware>();
+
     app.UseAuthorization();
 
     // Configure the app to listen on port 80

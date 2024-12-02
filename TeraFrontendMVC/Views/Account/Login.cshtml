@@ -1,9 +1,22 @@
 ﻿@model TeraFrontendMVC.Models.Account.Login
 
+@{
+    var errorMessage = Context.Session.GetString("ErrorMessage");
+    Context.Session.Remove("ErrorMessage");
+}
+
 @if (TempData["SucessMessage"] != null)
 {
     <div class="success-container alert alert-info alert-dismissible fade show" role="alert">
         @TempData["SucessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @errorMessage
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }

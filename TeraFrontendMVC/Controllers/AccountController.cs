@@ -21,8 +21,21 @@ namespace TeraFrontendMVC.Controllers
 
         // GET: Account/Register
         [HttpGet]
-        [ServiceFilter(typeof(RedirectIfAuthenticatedFilter))]
         public IActionResult Register()
+        {
+            return View();
+        }
+
+        // GET: Account/Login
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        // GET: Account/ChangePassword
+        [HttpGet]
+        public IActionResult ChangePassword()
         {
             return View();
         }
@@ -50,22 +63,7 @@ namespace TeraFrontendMVC.Controllers
             return View(model);
         }
 
-        // GET: Account/ChangePassword
-        [HttpGet]
-        [ServiceFilter(typeof(RedirectIfNotAuthenticatedFilter))]
-        public IActionResult ChangePassword()
-        {
-            var checkToken = HttpContext.Session.GetString("AuthToken");
-
-            if (string.IsNullOrEmpty(checkToken))
-            {
-                return RedirectToAction("Login", "Account");
-            }
-
-            return View();
-        }
-
-        // POST: Account/Register
+        // POST: Account/ChangePassword
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePassword model)
         {
@@ -107,15 +105,6 @@ namespace TeraFrontendMVC.Controllers
             return View(model);
         }
 
-
-        // GET: Account/Login
-        [HttpGet]
-        [ServiceFilter(typeof(RedirectIfAuthenticatedFilter))]
-        public IActionResult Login()
-        {
-            return View();
-        }
-
         // POST: Account/Login
         [HttpPost]
         public async Task<IActionResult> Login(Login model)
@@ -151,6 +140,7 @@ namespace TeraFrontendMVC.Controllers
             return View(model);
         }
 
+        // POST Logout
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
