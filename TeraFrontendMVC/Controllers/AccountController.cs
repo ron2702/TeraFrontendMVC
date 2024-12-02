@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
-using TeraFrontendMVC.Filter;
 using TeraFrontendMVC.Models.Account;
 
 namespace TeraFrontendMVC.Controllers
@@ -46,6 +45,11 @@ namespace TeraFrontendMVC.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (string.IsNullOrEmpty(model.Role))
+                {
+                    model.Role = "Usuario"; // Rol por defecto
+                }
+
                 var jsonContent = JsonConvert.SerializeObject(model);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
                 var response = await _httpClient.PostAsync("http://web/api/Usuarios/registrar-usuario", content);

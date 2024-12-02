@@ -1,5 +1,4 @@
 using TeraFrontendMVC.Controllers;
-using TeraFrontendMVC.Filter;
 
 var builder = WebApplication.CreateBuilder(args);
 

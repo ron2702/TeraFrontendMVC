@@ -40,6 +40,9 @@
         </div>
         <span asp-validation-for="Password" class="text-danger"></span>
 
+        @* Agregar un campo oculto para Role, ya que lo asignas por defecto en el controlador *@
+        <input type="hidden" asp-for="Role" value="Usuario" />
+
         @* Submit Button *@
         <button type="submit">Registrar</button>
     </form>
