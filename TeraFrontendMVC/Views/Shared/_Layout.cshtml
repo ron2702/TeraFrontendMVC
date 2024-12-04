@@ -55,11 +55,7 @@
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-end ul-menu-container" aria-labelledby="settingsDropdown">
                                         <li>
-                                            <a asp-area="" asp-controller="Account" asp-action="ChangePassword" class="dropdown-item">Cambiar Contraseña</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="dropdown-item" onclick="document.getElementById('logoutForm').submit()">Cerrar Sesión</a>
-                                            <form id="logoutForm" asp-area="" asp-controller="Account" asp-action="Logout" method="post" style="display: none;"></form>
+                                            <a asp-area="" asp-controller="Account" asp-action="UserProfile" class="dropdown-item">Perfil de Usuario</a>
                                         </li>
                                     </ul>
                                 </li>

@@ -50,4 +50,12 @@ namespace TeraFrontendMVC.Models.Account
     {
         public string Token { get; set; }
     }
+
+    public class UserProfile
+    {
+        public string Email { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public List<string> Roles { get; set; } = new List<string>();
+    }
 }

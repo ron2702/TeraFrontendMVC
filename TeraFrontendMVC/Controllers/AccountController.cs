@@ -39,6 +39,32 @@ namespace TeraFrontendMVC.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> UserProfile()
+        {
+            var token = HttpContext.Session.GetString("AuthToken");
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+            var response = await _httpClient.GetAsync("http://web/api/Usuarios/usuario-por-token");
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var userProfile = JsonConvert.DeserializeObject<UserProfile>(jsonResponse);
+
+                return View(userProfile);
+            }
+
+            // Si hay un error, muestra un mensaje y redirige
+            TempData["ErrorMessage"] = "Error al obtener los datos del perfil de usuario.";
+            return RedirectToAction("Index", "Home");
+        }
+
+
         // POST: Account/Register
         [HttpPost]
         public async Task<IActionResult> Register(Register model)
