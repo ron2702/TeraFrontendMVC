@@ -1,5 +1,4 @@
 using TeraFrontendMVC.Controllers;
-using TeraFrontendMVC.Filter;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,8 +62,9 @@ void ConfigurePipeline(WebApplication app)
     app.UseSession();
     app.UseRouting();
 
-    // Auth custom middleware
+    // Custom middleware
     app.UseMiddleware<AuthorizationMiddleware>();
+    app.UseMiddleware<RoleAuthorizationMiddleware>();
 
     app.UseAuthorization();
 

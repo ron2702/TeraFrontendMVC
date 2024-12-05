@@ -1,0 +1,66 @@
+﻿@model TeraFrontendMVC.Models.Account.UserProfile
+
+@{
+    var errorMessage = Context.Session.GetString("ErrorMessage");
+    Context.Session.Remove("ErrorMessage");
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="success-container alert alert-info alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @errorMessage
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+<div class="profile-container">
+    <h1>Perfil de Usuario</h1>
+    <div class="circular-landscape">
+        <img src="~/images/userpic.png">
+    </div>
+    @if (Model.Roles != null && Model.Roles.Contains("Admin"))
+    {
+        <p><strong>Rol:</strong> @string.Join(", ", Model.Roles)</p>
+    }
+    <p><strong>Email:</strong> @Model.Email</p>
+    <p><strong>Nombre:</strong> @Model.Nombre @Model.Apellido</p>
+
+    <div class="btn-container">
+
+        @if (!(Model.Email == "adminuser@gmail.com" && Model.Roles != null && Model.Roles.Contains("Admin"))) {
+            <button class="general-profile-btn profile-changepwd-btn"
+                    onclick="location.href='@Url.Action("ChangePassword", "Account")'">
+                Cambiar Contraseña
+            </button>
+        }
+        
+        @if (Model.Roles != null && Model.Roles.Contains("Admin")) {
+            <button class="general-profile-btn profile-changepwd-btn"
+                    onclick="location.href='@Url.Action("RegisterForAdmin", "Account")'">
+                Registrar Usuario
+            </button>
+        }
+
+        <button class="general-profile-btn profile-logout-btn"
+                onclick="document.getElementById('logoutForm').submit()">
+            Cerrar Sesión
+        </button>
+        <form id="logoutForm" asp-area="" asp-controller="Account" asp-action="Logout" method="post" style="display: none;"></form>
+    </div>
+</div>

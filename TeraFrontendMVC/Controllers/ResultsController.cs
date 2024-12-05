@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Globalization;
 using System.Text.Json;
-using TeraFrontendMVC.Filter;
 using TeraFrontendMVC.Models.Region;
 using TeraFrontendMVC.Models.Results;
 

@@ -189,6 +189,64 @@ button[type="submit"] {
     justify-items: center;
 }
 
+/* Profile Card*/
+.profile-container {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 450px;
+    margin: auto;
+    text-align: center;
+    padding: 30px 0;
+    background-color: #3d3d3d;
+    border-radius: 8px;
+}
+
+.general-profile-btn {
+    background-color: #04AA6D; /* Green */
+    border: none;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin: 10px 2px;
+    border-radius: 8px;
+}
+
+.profile-changepwd-btn {
+    background-color: #2d488c;
+}
+
+    .profile-changepwd-btn:hover {
+        background-color: #081360;
+    }
+
+.profile-logout-btn {
+    background-color: #cc1505;
+}
+
+    .profile-logout-btn:hover {
+        background-color: #64173b;
+    }
+
+.circular-landscape {
+    display: inline-block;
+    position: relative;
+    width: 125px;
+    height: 125px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+    .circular-landscape img {
+        width: auto;
+        height: 100%;
+    }
+
+.btn-container {
+    place-items: center;
+}
+
 /* Error Messages */
 .validation-summary-errors {
     color: #ff4d4d;

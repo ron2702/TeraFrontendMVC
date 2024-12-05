@@ -1,7 +1,7 @@
 ﻿@model TeraFrontendMVC.Models.Account.Register
 
 <div class="register-container">
-    <form id="registerForm" asp-action="Register" method="post">
+    <form id="registerForm" asp-action="RegisterForAdmin" method="post">
 
         <h2 class="register-title">Registro de Usuario</h2>
 
@@ -40,8 +40,13 @@
         </div>
         <span asp-validation-for="Password" class="text-danger"></span>
 
-        @* Agregar un campo oculto para Role, ya que lo asignas por defecto en el controlador *@
-        <input type="hidden" asp-for="Role" value="Usuario" />
+        @* Role Selection *@
+        <label class="custom-form-label" asp-for="Role">Rol</label>
+        <select asp-for="Role" class="form-control">
+            <option value="Usuario">Usuario</option>
+            <option value="Admin">Admin</option>
+        </select>
+        <span asp-validation-for="Role" class="text-danger"></span>
 
         @* Submit Button *@
         <button type="submit">Registrar</button>

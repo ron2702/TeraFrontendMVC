@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Text;
-using TeraFrontendMVC.Filter;
 using TeraFrontendMVC.Models.Account;
 
 namespace TeraFrontendMVC.Controllers
@@ -40,12 +39,50 @@ namespace TeraFrontendMVC.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> UserProfile()
+        {
+            var token = HttpContext.Session.GetString("AuthToken");
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+            var response = await _httpClient.GetAsync("http://web/api/Usuarios/usuario-por-token");
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var userProfile = JsonConvert.DeserializeObject<UserProfile>(jsonResponse);
+
+                return View(userProfile);
+            }
+
+            // Si hay un error, muestra un mensaje y redirige
+            TempData["ErrorMessage"] = "Error al obtener los datos del perfil de usuario.";
+            return RedirectToAction("Index", "Home");
+        }
+
+        // GET: Account/RegisterForAdmin
+        [HttpGet]
+        public IActionResult RegisterForAdmin()
+        {
+            return View();
+        }
+
+
         // POST: Account/Register
         [HttpPost]
         public async Task<IActionResult> Register(Register model)
         {
             if (ModelState.IsValid)
             {
+                if (string.IsNullOrEmpty(model.Role))
+                {
+                    model.Role = "Usuario"; // Rol por defecto
+                }
+
                 var jsonContent = JsonConvert.SerializeObject(model);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
                 var response = await _httpClient.PostAsync("http://web/api/Usuarios/registrar-usuario", content);
@@ -62,6 +99,48 @@ namespace TeraFrontendMVC.Controllers
 
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> RegisterForAdmin(Register model)
+        {
+            if (ModelState.IsValid)
+            {
+                var token = HttpContext.Session.GetString("AuthToken");
+
+                if (string.IsNullOrEmpty(token))
+                {
+                    TempData["ErrorMessage"] = "No se encontró un token de autenticación. Por favor, inicia sesión nuevamente.";
+                    return RedirectToAction("Login", "Account");
+                }
+
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                var jsonContent = JsonConvert.SerializeObject(model);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                try
+                {
+                    var response = await _httpClient.PostAsync("http://web/api/Usuarios/registrar-para-admin", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        TempData["SuccessMessage"] = "Usuario registrado con éxito";
+                        return RedirectToAction("UserProfile", "Account");
+                    }
+
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    ModelState.AddModelError(string.Empty, $"Error al registrar: {errorMessage}");
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error al realizar la solicitud al backend.");
+                    ModelState.AddModelError(string.Empty, "Ocurrió un error al comunicarse con el servidor. Inténtalo nuevamente.");
+                }
+            }
+
+            return View(model);
+        }
+
 
         // POST: Account/ChangePassword
         [HttpPost]
