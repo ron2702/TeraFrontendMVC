@@ -1,5 +1,21 @@
 ﻿@model TeraFrontendMVC.Models.Account.UserProfile
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="success-container alert alert-info alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["ErrorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
 <div class="profile-container">
     <h1>Perfil de Usuario</h1>
     <div class="circular-landscape">
@@ -22,7 +38,8 @@
         }
         
         @if (Model.Roles != null && Model.Roles.Contains("Admin")) {
-            <button class="general-profile-btn profile-changepwd-btn">
+            <button class="general-profile-btn profile-changepwd-btn"
+                    onclick="location.href='@Url.Action("RegisterForAdmin", "Account")'">
                 Registrar Usuario
             </button>
         }
@@ -31,6 +48,6 @@
                 onclick="document.getElementById('logoutForm').submit()">
             Cerrar Sesión
         </button>
+        <form id="logoutForm" asp-area="" asp-controller="Account" asp-action="Logout" method="post" style="display: none;"></form>
     </div>
-    <form id="logoutForm" asp-area="" asp-controller="Account" asp-action="Logout" method="post" style="display: none;"></form>
 </div>
