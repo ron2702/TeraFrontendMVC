@@ -56,6 +56,12 @@
                 Registrar Usuario
             </button>
         }
+        @if (Model.Roles != null && Model.Roles.Contains("Admin")) {
+            <button class="general-profile-btn profile-changepwd-btn"
+                    onclick="location.href='@Url.Action("ListUsersForAdmin", "Account")'">
+                Lista de Usuarios
+            </button>
+        }
 
         <button class="general-profile-btn profile-logout-btn"
                 onclick="document.getElementById('logoutForm').submit()">

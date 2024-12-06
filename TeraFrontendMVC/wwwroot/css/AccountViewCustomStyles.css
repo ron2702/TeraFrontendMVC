@@ -247,14 +247,79 @@ button[type="submit"] {
     place-items: center;
 }
 
-/* Error Messages */
-.validation-summary-errors {
-    color: #ff4d4d;
-    background-color: #ffe5e5;
-    padding: 0.5rem;
-    border-radius: 4px;
-    margin-top: 1rem;
+
+/* List User for Admin*/
+#usersTableContainer {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
 }
+
+    /* Estilo del scrollbar para el contenedor de la tabla */
+    #usersTableContainer::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    #usersTableContainer::-webkit-scrollbar-thumb {
+        background-color: #e6ac00;
+        border-radius: 5px;
+    }
+
+        #usersTableContainer::-webkit-scrollbar-thumb:hover {
+            background-color: #bf9004;
+        }
+
+    #usersTableContainer::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 5px;
+    }
+
+
+#usersTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    #usersTable th, #usersTable td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+
+        #usersTable th {
+            background-color: #e6ac00;
+            text-align: center;
+            color: white;
+        }
+
+        #usersTable tr:hover {
+            background-color: #5c5c5c;
+        }
+
+.pagination-btn-link {
+    position: relative;
+    display: block;
+    color: #ffff;
+    text-decoration: none;
+    background-color: #cc9900;
+    border: 1px solid #cc9900;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    padding: .375rem .75rem;
+}
+
+    .pagination-btn-link:hover {
+        color: #ffff !important;
+    }
+
+    /* Error Messages */
+    .validation-summary-errors {
+        color: #ff4d4d;
+        background-color: #ffe5e5;
+        padding: 0.5rem;
+        border-radius: 4px;
+        margin-top: 1rem;
+    }
 
 /* Sucess Message */
 

@@ -64,6 +64,46 @@ namespace TeraFrontendMVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        // GET: Account/ListUsersForAdmin
+        [HttpGet]
+        public async Task<IActionResult> ListUsersForAdmin(int page = 1, int pageSize = 10)
+        {
+            var token = HttpContext.Session.GetString("AuthToken");
+            if (string.IsNullOrEmpty(token))
+            {
+                TempData["ErrorMessage"] = "Inicia sesión como administrador para acceder a esta funcionalidad.";
+                return RedirectToAction("Login", "Account");
+            }
+            try
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                var url = $"http://web/api/Usuarios/listar-usuarios-admin?page={page}&pageSize={pageSize}";
+
+                var response = await _httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonResponse = await response.Content.ReadAsStringAsync();
+                    var userListResponse = JsonConvert.DeserializeObject<UserListResponse>(jsonResponse);
+
+                    return View(userListResponse);
+                }
+                else
+                {
+                    var errorMessage = await response.Content.ReadAsStringAsync();
+                    TempData["ErrorMessage"] = $"Error al listar usuarios: {errorMessage}";
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error al obtener la lista de usuarios.");
+                TempData["ErrorMessage"] = "Ocurrió un error al procesar la solicitud.";
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
         // GET: Account/RegisterForAdmin
         [HttpGet]
         public IActionResult RegisterForAdmin()

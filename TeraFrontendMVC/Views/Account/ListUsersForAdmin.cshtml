@@ -1,0 +1,60 @@
+﻿@model TeraFrontendMVC.Models.Account.UserListResponse
+
+<h1>Lista de Usuarios</h1>
+
+@if (Model.Users.Count == 0)
+{
+    <p>No hay usuarios disponibles.</p>
+}
+else
+{
+    <div id="usersTableContainer">
+        <table id="usersTable">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td>@user.Nombre</td>
+                        <td>@user.Apellido</td>
+                        <td>@user.Email</td>
+                        <td>@string.Join(", ", user.Roles)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Controles de paginación -->
+    <nav>
+        <ul class="pagination">
+            @if (Model.Page > 1)
+            {
+                <li class="page-item">
+                    <a class="pagination-btn-link" asp-action="ListUsersForAdmin" asp-route-page="@(Model.Page - 1)" asp-route-pageSize="@Model.PageSize">&lt;</a>
+                </li>
+            }
+
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.Page ? "active" : "")">
+                    <a class="pagination-btn-link" asp-action="ListUsersForAdmin" asp-route-page="@i" asp-route-pageSize="@Model.PageSize">@i</a>
+                </li>
+            }
+
+            @if (Model.Page < Model.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="pagination-btn-link" asp-action="ListUsersForAdmin" asp-route-page="@(Model.Page + 1)" asp-route-pageSize="@Model.PageSize">&gt;</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

@@ -58,4 +58,13 @@ namespace TeraFrontendMVC.Models.Account
         public string Apellido { get; set; }
         public List<string> Roles { get; set; } = new List<string>();
     }
+
+    public class UserListResponse
+    {
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public int TotalUsers { get; set; }
+        public int TotalPages { get; set; }
+        public List<UserProfile> Users { get; set; }
+    }
 }
