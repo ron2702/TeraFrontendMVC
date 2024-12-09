@@ -5,9 +5,13 @@ namespace TeraFrontendMVC.Models.Account
     public class Register
     {
         [Required(ErrorMessage = "Campo Requerido")]
+        [MinLength(2, ErrorMessage = "Debe tener al menos 2 caracteres.")]
+        [MaxLength(50, ErrorMessage = "No debe exceder 50 caracteres.")]
         public string Nombre { get; set; }
 
         [Required(ErrorMessage = "Campo Requerido")]
+        [MinLength(2, ErrorMessage = "Debe tener al menos 2 caracteres.")]
+        [MaxLength(50, ErrorMessage = "No debe exceder 50 caracteres.")]
         public string Apellido { get; set; }
 
         [Required(ErrorMessage = "Campo Requerido")]
@@ -28,6 +32,8 @@ namespace TeraFrontendMVC.Models.Account
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Campo Requerido")]
+        [MinLength(8)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$", ErrorMessage = "La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula, un número y un carácter especial.")]
         public string Password { get; set; }
     }
 
@@ -38,6 +44,8 @@ namespace TeraFrontendMVC.Models.Account
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Campo Requerido")]
+        [MinLength(8)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$", ErrorMessage = "La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula, un número y un carácter especial.")]
         public string PasswordActual { get; set; }
 
         [Required(ErrorMessage = "Campo Requerido")]
