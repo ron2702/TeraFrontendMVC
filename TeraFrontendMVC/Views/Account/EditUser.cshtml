@@ -1,0 +1,44 @@
+﻿@model TeraFrontendMVC.Models.Account.UpdateUser
+
+
+<div class="update-container">
+    <form id="updateUserForm" asp-action="EditUser" method="post">
+
+        <h2 class="register-title">Editar Datos</h2>
+
+        @* Mostrar errores generales *@
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @foreach (var error in ViewData.ModelState[string.Empty]?.Errors)
+                {
+                    <span>@error.ErrorMessage</span>
+                }
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        @* Email Input *@
+        <label asp-for="Email" class="custom-form-label">Email</label>
+        <input asp-for="Email" readonly />
+        <span asp-validation-for="Email" class="text-danger"></span>
+
+        @* Name Input *@
+        <label asp-for="Nombre" class="custom-form-label">Nombre</label>
+        <input asp-for="Nombre" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+
+        @* LastName Input *@
+        <label asp-for="Apellido" class="custom-form-label">Apellido</label>
+        <input asp-for="Apellido" />
+        <span asp-validation-for="Apellido" class="text-danger"></span>
+ 
+        <button type="submit">Cambiar</button>
+
+    </form>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

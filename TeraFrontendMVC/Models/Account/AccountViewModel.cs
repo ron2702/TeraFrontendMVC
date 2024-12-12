@@ -75,4 +75,21 @@ namespace TeraFrontendMVC.Models.Account
         public int TotalPages { get; set; }
         public List<UserProfile> Users { get; set; }
     }
+
+    public class UpdateUser
+    {
+        [Required(ErrorMessage = "Campo Requerido")]
+        [EmailAddress(ErrorMessage = "El formato del correo no es correcto")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Campo Requerido")]
+        [MinLength(2, ErrorMessage = "Debe tener al menos 2 caracteres.")]
+        [MaxLength(50, ErrorMessage = "No debe exceder 50 caracteres.")]
+        public string Nombre { get; set; }
+
+        [Required(ErrorMessage = "Campo Requerido")]
+        [MinLength(2, ErrorMessage = "Debe tener al menos 2 caracteres.")]
+        [MaxLength(50, ErrorMessage = "No debe exceder 50 caracteres.")]
+        public string Apellido { get; set; }
+    }
 }

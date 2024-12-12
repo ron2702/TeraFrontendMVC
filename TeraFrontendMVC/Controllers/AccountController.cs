@@ -104,6 +104,31 @@ namespace TeraFrontendMVC.Controllers
             }
         }
 
+        // GET: Account/EditUser
+        [HttpGet]
+        public async Task<IActionResult> EditUser()
+        {
+            var token = HttpContext.Session.GetString("AuthToken");
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+            var response = await _httpClient.GetAsync("http://web/api/Usuarios/usuario-por-token");
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var userProfile = JsonConvert.DeserializeObject<UpdateUser>(jsonResponse);
+
+                return View(userProfile);
+            }
+
+            TempData["ErrorMessage"] = "Error al obtener los datos del usuario.";
+            return RedirectToAction("Index", "Home");
+        }
+
         // GET: Account/RegisterForAdmin
         [HttpGet]
         public IActionResult RegisterForAdmin()
@@ -181,6 +206,37 @@ namespace TeraFrontendMVC.Controllers
             return View(model);
         }
 
+        // POST: Account/EditUser
+        [HttpPost]
+        public async Task<IActionResult> EditUser(UpdateUser model)
+        {
+            if (ModelState.IsValid)
+            {
+                var token = HttpContext.Session.GetString("AuthToken");
+                if (string.IsNullOrEmpty(token))
+                {
+                    return RedirectToAction("Login", "Account");
+                }
+
+                _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                var jsonContent = JsonConvert.SerializeObject(model);
+                var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+                var response = await _httpClient.PutAsync("http://web/api/Usuarios/editar-usuario", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    TempData["SuccessMessage"] = "Usuario actualizado correctamente";
+                    return RedirectToAction("UserProfile", "Account");
+                }
+
+                var errorMessage = await response.Content.ReadAsStringAsync();
+                ModelState.AddModelError(string.Empty, $"Error al actualizar usuario: {errorMessage}");
+            }
+
+            return View(model);
+        }
 
         // POST: Account/ChangePassword
         [HttpPost]

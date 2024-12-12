@@ -43,30 +43,38 @@
 
     <div class="btn-container">
 
-        @if (!(Model.Email == "adminuser@gmail.com" && Model.Roles != null && Model.Roles.Contains("Admin"))) {
+        <div class="first-btns">
             <button class="general-profile-btn profile-changepwd-btn"
-                    onclick="location.href='@Url.Action("ChangePassword", "Account")'">
-                Cambiar Contraseña
+                    onclick="location.href='@Url.Action("EditUser", "Account")'">
+                Editar Datos
             </button>
-        }
-        
-        @if (Model.Roles != null && Model.Roles.Contains("Admin")) {
-            <button class="general-profile-btn profile-changepwd-btn"
-                    onclick="location.href='@Url.Action("RegisterForAdmin", "Account")'">
-                Registrar Usuario
-            </button>
-        }
-        @if (Model.Roles != null && Model.Roles.Contains("Admin")) {
-            <button class="general-profile-btn profile-changepwd-btn"
-                    onclick="location.href='@Url.Action("ListUsersForAdmin", "Account")'">
-                Lista de Usuarios
-            </button>
-        }
 
-        <button class="general-profile-btn profile-logout-btn"
-                onclick="document.getElementById('logoutForm').submit()">
-            Cerrar Sesión
-        </button>
-        <form id="logoutForm" asp-area="" asp-controller="Account" asp-action="Logout" method="post" style="display: none;"></form>
+            @if (!(Model.Email == "adminuser@gmail.com" && Model.Roles != null && Model.Roles.Contains("Admin")))
+            {
+                <button class="general-profile-btn profile-changepwd-btn"
+                        onclick="location.href='@Url.Action("ChangePassword", "Account")'">
+                    Cambiar Contraseña
+                </button>
+            }
+        </div>
+        
+        <div class="second-btns">
+            @if (Model.Roles != null && Model.Roles.Contains("Admin"))
+            {
+                <button class="general-profile-btn profile-changepwd-btn"
+                        onclick="location.href='@Url.Action("RegisterForAdmin", "Account")'">
+                    Registrar Usuario
+                </button>
+            }
+
+            @if (Model.Roles != null && Model.Roles.Contains("Admin"))
+            {
+                <button class="general-profile-btn profile-changepwd-btn"
+                        onclick="location.href='@Url.Action("ListUsersForAdmin", "Account")'">
+                    Lista de Usuarios
+                </button>
+            }
+        </div> 
+
     </div>
 </div>

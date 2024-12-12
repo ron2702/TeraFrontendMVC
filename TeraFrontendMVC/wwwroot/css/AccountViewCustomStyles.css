@@ -174,7 +174,7 @@ button[type="submit"] {
 }
 
 /* Register, Change Password*/
-#registerForm, #changePwdForm {
+#registerForm, #changePwdForm, #updateUserForm {
     width: 100%;
     height: 100%;
     max-width: 400px;
@@ -185,7 +185,7 @@ button[type="submit"] {
     text-align: center;
 }
 
-.register-container, .change-password-container {
+.register-container, .change-password-container, .update-container {
     justify-items: center;
 }
 
@@ -247,7 +247,9 @@ button[type="submit"] {
     place-items: center;
 }
 
-
+.first-btns, .second-btns {
+    justify-items: center;
+}
 /* List User for Admin*/
 #usersTableContainer {
     max-height: 400px;
