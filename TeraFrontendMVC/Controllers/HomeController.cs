@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
@@ -13,16 +14,18 @@ namespace TeraFrontendMVC.Controllers
     {
         private readonly HttpClient _httpClient;
         private readonly ILogger<HomeController> _logger;
+        private readonly ApiUrls _apiUrls;
 
-        public HomeController(HttpClient httpClient, ILogger<HomeController> logger)
+        public HomeController(HttpClient httpClient, ILogger<HomeController> logger, IOptions<ApiUrls> apiUrls)
         {
             _httpClient = httpClient;
             _logger = logger;
+            _apiUrls = apiUrls.Value;
         }
 
         public async Task<IActionResult> Index()
         {
-            string url = $"http://web/api/Resultados/total-resultados";
+            string url = $"{_apiUrls.Resultados}/total-resultados";
             using (HttpClient client = new HttpClient())
             {
                 var response = await client.GetAsync(url);

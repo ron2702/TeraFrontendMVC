@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Text;
+using TeraFrontendMVC.Models;
 using TeraFrontendMVC.Models.Account;
 
 namespace TeraFrontendMVC.Controllers
@@ -11,11 +13,13 @@ namespace TeraFrontendMVC.Controllers
 
         private readonly HttpClient _httpClient;
         private readonly ILogger<AccountController> _logger;
+        private readonly ApiUrls _apiUrls;
 
-        public AccountController(HttpClient httpClient, ILogger<AccountController> logger)
+        public AccountController(HttpClient httpClient, ILogger<AccountController> logger, IOptions<ApiUrls> apiUrls)
         {
             _httpClient = httpClient;
             _logger = logger;
+            _apiUrls = apiUrls.Value;
         }
 
         // GET: Account/Register
@@ -50,7 +54,9 @@ namespace TeraFrontendMVC.Controllers
 
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-            var response = await _httpClient.GetAsync("http://web/api/Usuarios/usuario-por-token");
+            string url = $"{_apiUrls.Usuarios}/usuario-por-token";
+
+            var response = await _httpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
                 var jsonResponse = await response.Content.ReadAsStringAsync();
@@ -78,7 +84,7 @@ namespace TeraFrontendMVC.Controllers
             {
                 _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-                var url = $"http://web/api/Usuarios/listar-usuarios-admin?page={page}&pageSize={pageSize}";
+                var url = $"{_apiUrls.Usuarios}/listar-usuarios-admin?page={page}&pageSize={pageSize}";
 
                 var response = await _httpClient.GetAsync(url);
 
@@ -116,7 +122,9 @@ namespace TeraFrontendMVC.Controllers
 
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-            var response = await _httpClient.GetAsync("http://web/api/Usuarios/usuario-por-token");
+            string url = $"{_apiUrls.Usuarios}/usuario-por-token";
+
+            var response = await _httpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
                 var jsonResponse = await response.Content.ReadAsStringAsync();
@@ -148,9 +156,11 @@ namespace TeraFrontendMVC.Controllers
                     model.Role = "Usuario"; // Rol por defecto
                 }
 
+                string url = $"{_apiUrls.Usuarios}/registrar-usuario";
+
                 var jsonContent = JsonConvert.SerializeObject(model);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-                var response = await _httpClient.PostAsync("http://web/api/Usuarios/registrar-usuario", content);
+                var response = await _httpClient.PostAsync(url, content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -182,10 +192,11 @@ namespace TeraFrontendMVC.Controllers
 
                 var jsonContent = JsonConvert.SerializeObject(model);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                string url = $"{_apiUrls.Usuarios}/registrar-para-admin";
 
                 try
                 {
-                    var response = await _httpClient.PostAsync("http://web/api/Usuarios/registrar-para-admin", content);
+                    var response = await _httpClient.PostAsync(url, content);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -223,7 +234,9 @@ namespace TeraFrontendMVC.Controllers
                 var jsonContent = JsonConvert.SerializeObject(model);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-                var response = await _httpClient.PutAsync("http://web/api/Usuarios/editar-usuario", content);
+                string url = $"{_apiUrls.Usuarios}/editar-usuario";
+
+                var response = await _httpClient.PutAsync(url, content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -246,7 +259,10 @@ namespace TeraFrontendMVC.Controllers
             {
                 var changpwdjson = JsonConvert.SerializeObject(model);
                 var changepwdcontent = new StringContent(changpwdjson, Encoding.UTF8, "application/json");
-                var responseChangpwd = await _httpClient.PostAsync("http://web/api/Usuarios/modificar-contrasena", changepwdcontent);
+
+                string url = $"{_apiUrls.Usuarios}/modificar-contrasena";
+
+                var responseChangpwd = await _httpClient.PostAsync(url, changepwdcontent);
 
                 if (responseChangpwd.IsSuccessStatusCode)
                 {
@@ -261,7 +277,9 @@ namespace TeraFrontendMVC.Controllers
                     var jsonContent = JsonConvert.SerializeObject(token);
                     var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-                    var response = await _httpClient.PostAsync("http://web/api/Usuarios/logout", content);
+                    string url2 = $"{_apiUrls.Usuarios}/logout";
+
+                    var response = await _httpClient.PostAsync(url2, content);
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -288,7 +306,10 @@ namespace TeraFrontendMVC.Controllers
             {
                 var jsonContent = JsonConvert.SerializeObject(model);
                 var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
-                var response = await _httpClient.PostAsync("http://web/api/Usuarios/login", content);
+                
+                string url = $"{_apiUrls.Usuarios}/login";
+
+                var response = await _httpClient.PostAsync(url, content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -329,7 +350,9 @@ namespace TeraFrontendMVC.Controllers
             var jsonContent = JsonConvert.SerializeObject(token);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            var response = await _httpClient.PostAsync("http://web/api/Usuarios/logout", content);
+            string url = $"{_apiUrls.Usuarios}/logout";
+
+            var response = await _httpClient.PostAsync(url, content);
 
             if (response.IsSuccessStatusCode)
             {

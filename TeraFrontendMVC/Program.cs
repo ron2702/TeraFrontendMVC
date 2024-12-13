@@ -1,9 +1,15 @@
 using TeraFrontendMVC.Controllers;
+using TeraFrontendMVC.Models;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Configure ApiUrls
+builder.Services.Configure<ApiUrls>(builder.Configuration.GetSection("ApiUrls"));
+
 ConfigureServices(builder.Services, builder.Configuration);
 
 // Build the app
@@ -20,7 +26,6 @@ void ConfigureServices(IServiceCollection services, IConfiguration configuration
     ConfigureSession(services);
     ConfigureHttpClients(services, configuration);
 }
-
 
 // Method to configure HttpClient services for each controller
 void ConfigureHttpClients(IServiceCollection services, IConfiguration configuration)

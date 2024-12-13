@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System.Globalization;
 using System.Text.Json;
+using TeraFrontendMVC.Models;
 using TeraFrontendMVC.Models.Region;
 using TeraFrontendMVC.Models.Results;
 
@@ -12,11 +14,13 @@ namespace TeraFrontendMVC.Controllers
     {
         private readonly HttpClient _httpClient;
         private readonly ILogger<ResultsController> _logger;
+        private readonly ApiUrls _apiUrls;
 
-        public ResultsController(HttpClient httpClient, ILogger<ResultsController> logger)
+        public ResultsController(HttpClient httpClient, ILogger<ResultsController> logger, IOptions<ApiUrls> apiUrls)
         {
             _httpClient = httpClient;
             _logger = logger;
+            _apiUrls = apiUrls.Value;
         }
 
         // GET: Results
@@ -46,7 +50,7 @@ namespace TeraFrontendMVC.Controllers
             {
                 var token = HttpContext.Session.GetString("AuthToken");
 
-                string url = $"http://web/api/Resultados/resultados?codEdo={codEdo}&munId={munId}&codPar={codPar}&pageSize={pageSize}&pageNumber={pageNumber}";
+                string url = $"{_apiUrls.Resultados}/resultados?codEdo={codEdo}&munId={munId}&codPar={codPar}&pageSize={pageSize}&pageNumber={pageNumber}";
 
                 using (HttpClient client = new HttpClient())
                 {
@@ -114,7 +118,7 @@ namespace TeraFrontendMVC.Controllers
             try
             {
                 // Crear la query string condicionalmente según los parámetros
-                var queryString = $"http://web/api/Region/estados?";
+                var queryString = $"{_apiUrls.Region}/estados?";
                 if (codEdo.HasValue)
                 {
                     queryString += $"codEdo={codEdo.Value}";
@@ -156,7 +160,7 @@ namespace TeraFrontendMVC.Controllers
             try
             {
                 // Crear la query string condicionalmente según los parámetros
-                var queryString = $"http://web/api/Region/municipios?";
+                var queryString = $"{_apiUrls.Region}/municipios?";
                 if (codMun.HasValue)
                 {
                     queryString += $"codMun={codMun.Value}&";
@@ -203,7 +207,7 @@ namespace TeraFrontendMVC.Controllers
             try
             {
                 // Crear la query string condicionalmente según los parámetros
-                var queryString = $"http://web/api/Region/parroquias?";
+                var queryString = $"{_apiUrls.Region}/parroquias?";
                 if (codMun.HasValue)
                 {
                     queryString += $"codMun={codMun.Value}";
