@@ -16,6 +16,7 @@ else
                     <th>Apellido</th>
                     <th>Email</th>
                     <th>Roles</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +27,11 @@ else
                         <td>@user.Apellido</td>
                         <td>@user.Email</td>
                         <td>@string.Join(", ", user.Roles)</td>
+                        <td>
+                            <a asp-controller="Account" asp-action="EditUser" asp-route-email="@user.Email" class="btn btn-primary btn-dark-blue">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
                     </tr>
                 }
             </tbody>

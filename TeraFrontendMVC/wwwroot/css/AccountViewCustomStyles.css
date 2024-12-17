@@ -76,6 +76,10 @@ button[type="submit"] {
         background-color: #081360;
     }
 
+.btn-dark-blue {
+    background-color: #2d488c;
+}
+
 /* Label Styles */
 .custom-form-label {
     font-weight: bold;

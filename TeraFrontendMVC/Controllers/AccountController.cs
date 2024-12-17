@@ -112,7 +112,7 @@ namespace TeraFrontendMVC.Controllers
 
         // GET: Account/EditUser
         [HttpGet]
-        public async Task<IActionResult> EditUser()
+        public async Task<IActionResult> EditUser(string email = null)
         {
             var token = HttpContext.Session.GetString("AuthToken");
             if (string.IsNullOrEmpty(token))
@@ -122,7 +122,8 @@ namespace TeraFrontendMVC.Controllers
 
             _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
-            string url = $"{_apiUrls.Usuarios}/usuario-por-token";
+
+            string url = string.IsNullOrEmpty(email) ? $"{_apiUrls.Usuarios}/usuario-por-token" : $"{_apiUrls.Usuarios}/usuario-por-email?email={email}";
 
             var response = await _httpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
