@@ -196,6 +196,14 @@ button[type="submit"] {
     height: 100%;
 }
 
+input[readonly] {
+    background-color: #adadad;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+
+
 /* Profile Card*/
 .profile-container {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
