@@ -190,7 +190,10 @@ button[type="submit"] {
 }
 
 .register-container, .change-password-container, .update-container {
-    justify-items: center;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    height: 100%;
 }
 
 /* Profile Card*/
@@ -215,6 +218,10 @@ button[type="submit"] {
     font-size: 16px;
     margin: 10px 2px;
     border-radius: 8px;
+
+    width: 100%;
+    max-width: 265px;
+    margin-bottom: 10px;
 }
 
 .profile-changepwd-btn {
@@ -248,12 +255,19 @@ button[type="submit"] {
     }
 
 .btn-container {
-    place-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .first-btns, .second-btns {
-    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
 }
+
 /* List User for Admin*/
 #usersTableContainer {
     max-height: 400px;
