@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using Newtonsoft.Json;
 using System.Text;
 using TeraFrontendMVC.Models;
@@ -38,9 +39,35 @@ namespace TeraFrontendMVC.Controllers
 
         // GET: Account/ChangePassword
         [HttpGet]
-        public IActionResult ChangePassword()
+        public async Task<IActionResult> ChangePassword()
         {
-            return View();
+
+            var token = HttpContext.Session.GetString("AuthToken");
+            if (string.IsNullOrEmpty(token))
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            _httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+            string url = $"{_apiUrls.Usuarios}/usuario-por-token";
+
+            var response = await _httpClient.GetAsync(url);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+                var userProfile = JsonConvert.DeserializeObject<UserProfile>(jsonResponse);
+                var changePasswordModel = new Models.Account.ChangePassword
+                {
+                    Email = userProfile.Email
+                };
+                return View(changePasswordModel);
+            }
+
+            // Si hay un error, muestra un mensaje y redirige
+            TempData["ErrorMessage"] = "Error al obtener los datos del perfil de usuario.";
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
@@ -254,7 +281,7 @@ namespace TeraFrontendMVC.Controllers
 
         // POST: Account/ChangePassword
         [HttpPost]
-        public async Task<IActionResult> ChangePassword(ChangePassword model)
+        public async Task<IActionResult> ChangePassword(Models.Account.ChangePassword model)
         {
             if (ModelState.IsValid)
             {
