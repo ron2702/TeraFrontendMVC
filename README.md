@@ -3,7 +3,7 @@
 
 This project was created with the goal of learning Razor. Through it, I explored various concepts and implementations, including partial views, dynamic page rendering, layout management, and data binding. Additionally, I focused on maintaining best practices throughout the development process.
 
-The project focused on the 2024 elections held in Venezuela.
+The project focused on a random election process 
 
 
 
